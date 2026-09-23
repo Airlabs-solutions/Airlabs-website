@@ -2,26 +2,101 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Light theme */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 10%; /* charcoal-900 */
+    --surface: 0 0% 95%; /* charcoal-100 */
+    --muted: 0 0% 95%;
+    --muted-foreground: 0 0% 45%; /* charcoal-500 */
+    --border: 0 0% 90%; /* charcoal-200 */
+    --accent: 204 61% 27%; /* navy-600 */
+    --accent-foreground: 0 0% 100%;
+
+    /* Hero gradient-mesh stops (light) */
+    --mesh-1: 203 62% 96%; /* navy-50 */
+    --mesh-2: 204 65% 82%; /* navy-200 */
+    --mesh-3: 0 0% 90%; /* charcoal-200 */
+  }
+
+  .dark {
+    --background: 0 0% 5%; /* charcoal-950 */
+    --foreground: 0 0% 100%;
+    --surface: 0 0% 10%; /* charcoal-900 */
+    --muted: 0 0% 15%; /* charcoal-800 */
+    --muted-foreground: 0 0% 64%; /* charcoal-400 */
+    --border: 0 0% 25%; /* charcoal-700 */
+    --accent: 204 64% 55%; /* navy-400, brighter for dark-mode contrast */
+    --accent-foreground: 0 0% 10%;
+
+    /* Hero gradient-mesh stops (dark) */
+    --mesh-1: 205 65% 16%; /* navy-800 */
+    --mesh-2: 205 64% 11%; /* navy-900 */
+    --mesh-3: 0 0% 15%; /* charcoal-800 */
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans), sans-serif;
+  }
+
+  ::selection {
+    @apply bg-navy-600/20 text-foreground;
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--accent));
+    outline-offset: 2px;
+  }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* Peaked/mountain motif clip-path, echoing the AIR logo's "A" */
+  .clip-peak {
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+  }
+
+  /* Layered elevation on hover — tight near-shadow + soft diffused shadow,
+     used instead of a single flat blur so raised cards read as physical. */
+  .card-elevate {
+    transition: transform 300ms, box-shadow 300ms, border-color 300ms;
+  }
+  .card-elevate:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 2px 8px -2px rgba(27, 78, 113, 0.12),
+      0 16px 40px -12px rgba(27, 78, 113, 0.25);
+  }
+  .dark .card-elevate:hover {
+    box-shadow:
+      0 2px 8px -2px rgba(0, 0, 0, 0.4),
+      0 16px 40px -12px rgba(66, 154, 214, 0.15);
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-float,
+  .animate-ping {
+    animation: none !important;
   }
 }
