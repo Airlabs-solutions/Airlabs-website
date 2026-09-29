@@ -28,7 +28,7 @@ export function CTABanner() {
 
           <motion.h2
             variants={fadeUp}
-            className="relative text-balance font-display text-3xl font-bold tracking-tight text-white sm:text-5xl"
+            className="relative text-balance font-display text-3xl font-semibold tracking-tight text-white sm:text-5xl"
           >
             Have a project in mind? Let&apos;s build it.
           </motion.h2>
@@ -41,7 +41,7 @@ export function CTABanner() {
           </motion.p>
           <motion.div variants={fadeUp} className="relative mt-8">
             <Button
-              href="mailto:info@airlabss.com"
+              href="/contact"
               size="lg"
               className="bg-white text-navy-800 hover:bg-white/90"
             >

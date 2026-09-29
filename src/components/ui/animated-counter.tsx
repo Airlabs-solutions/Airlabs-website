@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useInView, useMotionValue, useSpring } from "framer-motion";
+import { animate, useInView, useReducedMotion } from "framer-motion";
 
 export function AnimatedCounter({
   value,
@@ -17,21 +17,33 @@ export function AnimatedCounter({
   className?: string;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.6 });
-  const motionValue = useMotionValue(0);
-  const spring = useSpring(motionValue, { duration: 1800, bounce: 0 });
+  const inView = useInView(ref, { once: true, amount: 0.4 });
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
-    if (inView) motionValue.set(value);
-  }, [inView, value, motionValue]);
+    const node = ref.current;
+    if (!node) return;
 
-  useEffect(() => {
-    return spring.on("change", (latest) => {
-      if (ref.current) {
-        ref.current.textContent = `${prefix}${latest.toFixed(decimals)}${suffix}`;
-      }
+    const format = (latest: number) =>
+      `${prefix}${latest.toFixed(decimals)}${suffix}`;
+
+    if (!inView) return;
+
+    if (reduceMotion) {
+      node.textContent = format(value);
+      return;
+    }
+
+    const controls = animate(0, value, {
+      duration: 1.6,
+      ease: [0.22, 1, 0.36, 1],
+      onUpdate: (latest) => {
+        node.textContent = format(latest);
+      },
     });
-  }, [spring, prefix, suffix, decimals]);
+
+    return () => controls.stop();
+  }, [inView, value, prefix, suffix, decimals, reduceMotion]);
 
   return (
     <span ref={ref} className={className}>

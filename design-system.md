@@ -50,14 +50,15 @@ red/amber (e.g. destructive delete) before improvising one.
 
 ## Typography
 
-- **Display / headings**: `Space Grotesk` (`font-display`) — geometric,
-  angular, echoes the peaked "A" in the logo. Used for `h1`–`h3` and large
-  stat numbers.
-- **Body / UI**: `Inter` (`font-sans`) — default body font.
+- **Headings**: `Poppins` SemiBold (`font-display`, weight 600) — used for
+  `h1`–`h6`, large stat numbers, and display lockups.
+- **Body / UI**: `Inter` Regular (`font-sans`, weight 400) — default body font.
+  Medium/SemiBold Inter weights are also loaded for labels and nav chrome.
+- **Buttons**: `Poppins` Medium (`font-display` + `font-medium`, weight 500) —
+  applied on the shared `<Button>` component.
 - Loaded via `next/font/google` in `src/app/layout.tsx`, exposed as
   `--font-display` / `--font-sans`.
-- Large headlines use `tracking-tight` and `text-balance` for confident,
-  Freehand/Devfolio-style wrapping.
+- Large headlines use `tracking-tight` and `text-balance` for confident wrapping.
 
 ## Spacing & layout
 
@@ -74,11 +75,8 @@ Reusable Framer Motion variants — import these rather than inlining
 transitions, so easing/duration stay consistent site-wide:
 
 - `fadeUp` — opacity + 28px rise, the default scroll-reveal
-- `fadeIn`, `scaleIn`, `slideInLeft` / `slideInRight`
 - `staggerContainer(stagger, delayChildren)` — wrap groups of `fadeUp`
   children
-- `peakReveal` — clip-path reveal shaped after the logo's peak, for dividers
-  / loading states
 - `defaultViewport` — `{ once: true, amount: 0.3 }`, the standard
   `whileInView` viewport config
 - Shared ease curve: `EASE = [0.22, 1, 0.36, 1]`

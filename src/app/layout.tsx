@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Inter, Poppins } from "next/font/google";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import "./globals.css";
@@ -8,12 +8,14 @@ const sans = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
+  weight: ["400", "500", "600"],
 });
 
-const display = Space_Grotesk({
+const display = Poppins({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
+  weight: ["500", "600"],
 });
 
 export const metadata: Metadata = {
@@ -38,7 +40,9 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${sans.variable} ${display.variable} font-sans`}>
+      <body
+        className={`${sans.variable} ${display.variable} font-sans font-normal`}
+      >
         <Navbar />
         <main>{children}</main>
         <Footer />

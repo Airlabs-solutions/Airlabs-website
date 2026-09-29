@@ -33,7 +33,7 @@ export function Footer() {
           <div>
             <Logo height={34} />
             <p className="mt-4 max-w-xs text-sm text-muted-foreground">
-              A full-stack IT partner — web, software, mobile, AI automation,
+              A full-stack IT partner for web, software, mobile, AI automation,
               digital marketing, and infrastructure, under one roof.
             </p>
             <div className="mt-6 flex gap-3">
@@ -56,7 +56,7 @@ export function Footer() {
               {services.map((service) => (
                 <li key={service.slug}>
                   <Link
-                    href={`#services-${service.slug}`}
+                    href={`/services#${service.slug}`}
                     className="text-sm text-muted-foreground transition-colors hover:text-navy-600 dark:hover:text-navy-300"
                   >
                     {service.title}
@@ -70,11 +70,10 @@ export function Footer() {
             <h3 className="text-sm font-semibold text-foreground">Company</h3>
             <ul className="mt-4 space-y-2.5">
               {[
-                { label: "Home", href: "#home" },
-                { label: "Process", href: "#process" },
-                { label: "Portfolio", href: "#portfolio" },
-                { label: "Testimonials", href: "#testimonials" },
-                { label: "Get a Quote", href: "#contact" },
+                { label: "Home", href: "/" },
+                { label: "About us", href: "/about" },
+                { label: "Services", href: "/services" },
+                { label: "Contact us", href: "/contact" },
               ].map((link) => (
                 <li key={link.href}>
                   <Link
@@ -95,11 +94,11 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-2">
                 <Phone className="mt-0.5 h-4 w-4 shrink-0" />
-                +1 (555) 010-0123
+                +966 551076120
               </li>
               <li className="flex items-start gap-2">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
-                123 Innovation Way, Suite 400
+                4790 King Fahd Bin Abdulaziz Rd، Riyad Bank Building, Aqrabiya 7598, Al Khobar 34441, Kingdom of Saudi Arabia
               </li>
             </ul>
           </div>
@@ -107,7 +106,7 @@ export function Footer() {
           <div>
             <h3 className="text-sm font-semibold text-foreground">Stay in the loop</h3>
             <p className="mt-4 text-sm text-muted-foreground">
-              Occasional notes on what we&apos;re building — no spam.
+              Occasional notes on what we&apos;re building, no spam.
             </p>
             <form onSubmit={handleSubmit} className="mt-4">
               <div className="flex items-center gap-2 rounded-full border border-border bg-background p-1.5 focus-within:border-navy-600">

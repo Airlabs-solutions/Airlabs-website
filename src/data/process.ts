@@ -2,6 +2,8 @@ export interface ProcessStep {
   step: string;
   title: string;
   description: string;
+  /** What the client walks away with at this step */
+  youGet: string;
 }
 
 export const processSteps: ProcessStep[] = [
@@ -9,24 +11,28 @@ export const processSteps: ProcessStep[] = [
     step: "01",
     title: "Discover",
     description:
-      "We dig into your goals, users, and constraints before writing a single line of scope.",
+      "A working session on the problem, who uses the system, and what must be true for it to succeed.",
+    youGet: "A written brief you can share with your team.",
   },
   {
     step: "02",
-    title: "Design",
+    title: "Plan",
     description:
-      "Architecture, UX, and a project plan you sign off on — no surprises once build starts.",
+      "Scope, timeline, and cost in plain language. Nothing starts until you approve it.",
+    youGet: "A plan you can sign off on before build.",
   },
   {
     step: "03",
     title: "Build",
     description:
-      "Agile sprints with regular demos, so you're steering the whole way, not just at the end.",
+      "Working software in short cycles, with a demo each round so you can correct course early.",
+    youGet: "Something you can click, not a status deck.",
   },
   {
     step: "04",
-    title: "Launch & Support",
+    title: "Launch & support",
     description:
-      "We ship, monitor, and keep improving — support doesn't stop at go-live.",
+      "Go-live, handover, and a named person to call when something needs a change.",
+    youGet: "A system you can run, plus a support path.",
   },
 ];

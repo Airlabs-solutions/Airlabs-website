@@ -27,10 +27,17 @@ export function Process() {
           </motion.span>
           <motion.h2
             variants={fadeUp}
-            className="mt-3 text-balance font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl"
+            className="mt-3 text-balance font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl"
           >
-            A process built for momentum
+            What working with us looks like
           </motion.h2>
+          <motion.p
+            variants={fadeUp}
+            className="mt-4 text-balance text-muted-foreground sm:text-lg"
+          >
+            From the first conversation to a system your team can run — so you
+            know what happens next before you commit.
+          </motion.p>
         </motion.div>
 
         <motion.div
@@ -69,7 +76,7 @@ export function Process() {
 
           {processSteps.map((step) => (
             <motion.div key={step.step} variants={fadeUp} className="relative">
-              <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border-2 border-navy-600 bg-background font-display text-sm font-bold text-navy-600 dark:border-navy-300 dark:text-navy-300">
+              <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full border-2 border-navy-600 bg-background font-display text-sm font-semibold text-navy-600 dark:border-navy-300 dark:text-navy-300">
                 {step.step}
               </div>
               <h3 className="mt-5 font-display text-lg font-semibold text-foreground">
@@ -77,6 +84,10 @@ export function Process() {
               </h3>
               <p className="mt-2 text-sm text-muted-foreground">
                 {step.description}
+              </p>
+              <p className="mt-3 text-sm font-medium text-foreground">
+                <span className="text-navy-600 dark:text-navy-300">You get: </span>
+                {step.youGet}
               </p>
             </motion.div>
           ))}

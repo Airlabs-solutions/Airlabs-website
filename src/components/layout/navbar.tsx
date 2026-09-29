@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { Logo } from "@/components/ui/logo";
@@ -11,12 +12,13 @@ import { services } from "@/data/services";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { label: "Process", href: "#process" },
-  { label: "Portfolio", href: "#portfolio" },
-  { label: "Testimonials", href: "#testimonials" },
+  { label: "Home", href: "/" },
+  { label: "About us", href: "/about" },
+  { label: "Contact us", href: "/contact" },
 ];
 
 export function Navbar() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -35,26 +37,40 @@ export function Navbar() {
     };
   }, [mobileOpen]);
 
+  useEffect(() => {
+    setMobileOpen(false);
+    setServicesOpen(false);
+  }, [pathname]);
+
+  const linkClass = (href: string) =>
+    cn(
+      "rounded-full px-4 py-2 text-sm font-medium transition-colors",
+      pathname === href
+        ? "text-foreground"
+        : "text-foreground/80 hover:text-foreground"
+    );
+
   return (
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-300",
-        scrolled
+        scrolled || pathname !== "/"
           ? "bg-background/85 backdrop-blur-md border-b border-border shadow-sm"
           : "bg-transparent border-b border-transparent"
       )}
     >
       <div className="container flex h-20 items-center justify-between py-3">
-        <Link href="#home" className="flex items-center" aria-label="AirLabs Solutions home">
+        <Link href="/" className="flex items-center" aria-label="AirLabs Solutions home">
           <Logo height={38} />
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex">
-          <Link
-            href="#home"
-            className="rounded-full px-4 py-2 text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
-          >
+          <Link href="/" className={linkClass("/")}>
             Home
+          </Link>
+
+          <Link href="/about" className={linkClass("/about")}>
+            About us
           </Link>
 
           <div
@@ -62,8 +78,14 @@ export function Navbar() {
             onMouseEnter={() => setServicesOpen(true)}
             onMouseLeave={() => setServicesOpen(false)}
           >
-            <button
-              className="flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
+            <Link
+              href="/services"
+              className={cn(
+                "flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition-colors",
+                pathname.startsWith("/services")
+                  ? "text-foreground"
+                  : "text-foreground/80 hover:text-foreground"
+              )}
               aria-expanded={servicesOpen}
               aria-haspopup="true"
             >
@@ -74,7 +96,7 @@ export function Navbar() {
                   servicesOpen && "rotate-180"
                 )}
               />
-            </button>
+            </Link>
 
             <AnimatePresence>
               {servicesOpen && (
@@ -89,11 +111,14 @@ export function Navbar() {
                     {services.map((service) => (
                       <Link
                         key={service.slug}
-                        href={`#services-${service.slug}`}
+                        href={`/services#${service.slug}`}
                         onClick={() => setServicesOpen(false)}
                         className="group flex items-start gap-3 rounded-xl p-3 transition-colors hover:bg-surface"
                       >
-                        <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-navy-600/10 text-navy-600 transition-colors group-hover:bg-navy-600 group-hover:text-white dark:text-navy-300 dark:group-hover:text-white">
+                        <span
+                          className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-white transition-transform group-hover:scale-105"
+                          style={{ backgroundColor: service.accent }}
+                        >
                           <service.icon className="h-4 w-4" />
                         </span>
                         <span>
@@ -112,20 +137,14 @@ export function Navbar() {
             </AnimatePresence>
           </div>
 
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="rounded-full px-4 py-2 text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
-            >
-              {link.label}
-            </Link>
-          ))}
+          <Link href="/contact" className={linkClass("/contact")}>
+            Contact us
+          </Link>
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
           <ThemeToggle />
-          <Button href="#contact" size="md">
+          <Button href="/contact" size="md">
             Get a Quote
           </Button>
         </div>
@@ -152,28 +171,6 @@ export function Navbar() {
             className="overflow-hidden border-t border-border bg-background lg:hidden"
           >
             <div className="container flex flex-col gap-1 py-4">
-              <Link
-                href="#home"
-                onClick={() => setMobileOpen(false)}
-                className="rounded-lg px-2 py-2 text-sm font-medium text-foreground/90 hover:bg-surface"
-              >
-                Home
-              </Link>
-              <div className="my-1 h-px bg-border" />
-              <p className="px-2 pb-1 pt-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                Services
-              </p>
-              {services.map((service) => (
-                <Link
-                  key={service.slug}
-                  href={`#services-${service.slug}`}
-                  onClick={() => setMobileOpen(false)}
-                  className="rounded-lg px-2 py-2 text-sm font-medium text-foreground/90 hover:bg-surface"
-                >
-                  {service.title}
-                </Link>
-              ))}
-              <div className="my-2 h-px bg-border" />
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -184,7 +181,29 @@ export function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              <Button href="#contact" className="mt-3 w-full" onClick={() => setMobileOpen(false)}>
+              <div className="my-1 h-px bg-border" />
+              <Link
+                href="/services"
+                onClick={() => setMobileOpen(false)}
+                className="rounded-lg px-2 py-2 text-sm font-medium text-foreground/90 hover:bg-surface"
+              >
+                All services
+              </Link>
+              {services.map((service) => (
+                <Link
+                  key={service.slug}
+                  href={`/services#${service.slug}`}
+                  onClick={() => setMobileOpen(false)}
+                  className="rounded-lg px-2 py-2 pl-4 text-sm font-medium text-foreground/80 hover:bg-surface"
+                >
+                  {service.title}
+                </Link>
+              ))}
+              <Button
+                href="/contact"
+                className="mt-3 w-full"
+                onClick={() => setMobileOpen(false)}
+              >
                 Get a Quote
               </Button>
             </div>

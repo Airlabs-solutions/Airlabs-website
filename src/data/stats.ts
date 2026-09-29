@@ -6,8 +6,8 @@ export interface Stat {
 }
 
 export const stats: Stat[] = [
-  { value: 8, suffix: "+", label: "Years in business" },
+  { value: 5, suffix: "+", label: "Years in business" },
   { value: 120, suffix: "+", label: "Projects delivered" },
   { value: 60, suffix: "+", label: "Clients served" },
-  { value: 99.9, suffix: "%", decimals: 1, label: "Uptime SLA" },
+  { value: 95.9, suffix: "%", decimals: 1, label: "Uptime SLA" },
 ];

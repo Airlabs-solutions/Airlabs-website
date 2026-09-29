@@ -23,7 +23,7 @@ export function TechStack() {
           <span className="text-xs font-medium uppercase tracking-wider text-navy-600 dark:text-navy-300">
             Our stack
           </span>
-          <h2 className="mt-3 text-balance font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+          <h2 className="mt-3 text-balance font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
             Tools we build with
           </h2>
         </motion.div>

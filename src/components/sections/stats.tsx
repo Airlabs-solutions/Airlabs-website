@@ -19,7 +19,7 @@ export function Stats() {
         >
           {stats.map((stat) => (
             <motion.div key={stat.label} variants={fadeUp} className="text-center">
-              <p className="font-display text-4xl font-bold sm:text-5xl">
+              <p className="font-display text-4xl font-semibold sm:text-5xl">
                 <AnimatedCounter
                   value={stat.value}
                   suffix={stat.suffix}

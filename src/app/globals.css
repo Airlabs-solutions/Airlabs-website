@@ -43,8 +43,18 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-foreground antialiased font-normal;
     font-family: var(--font-sans), sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display), sans-serif;
+    font-weight: 600;
   }
 
   ::selection {
@@ -60,36 +70,6 @@
 @layer utilities {
   .text-balance {
     text-wrap: balance;
-  }
-
-  /* Peaked/mountain motif clip-path, echoing the AIR logo's "A" */
-  .clip-peak {
-    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
-  }
-
-  /* Layered elevation on hover — tight near-shadow + soft diffused shadow,
-     used instead of a single flat blur so raised cards read as physical. */
-  .card-elevate {
-    transition: transform 300ms, box-shadow 300ms, border-color 300ms;
-  }
-  .card-elevate:hover {
-    transform: translateY(-4px);
-    box-shadow:
-      0 2px 8px -2px rgba(27, 78, 113, 0.12),
-      0 16px 40px -12px rgba(27, 78, 113, 0.25);
-  }
-  .dark .card-elevate:hover {
-    box-shadow:
-      0 2px 8px -2px rgba(0, 0, 0, 0.4),
-      0 16px 40px -12px rgba(66, 154, 214, 0.15);
-  }
-
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
   }
 }
 

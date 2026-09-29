@@ -1,0 +1,304 @@
+"use client";
+
+import { FormEvent, useState } from "react";
+import { motion } from "framer-motion";
+import { CheckCircle2, Clock, Mail, MapPin, Phone, Send } from "lucide-react";
+import { PageHero } from "@/components/ui/page-hero";
+import { Container } from "@/components/ui/container";
+import { Section } from "@/components/ui/section";
+import { Button } from "@/components/ui/button";
+import { contactDetails } from "@/data/contact";
+import { defaultViewport, fadeUp, staggerContainer } from "@/lib/motion";
+import { cn } from "@/lib/utils";
+
+type FormState = {
+  name: string;
+  email: string;
+  company: string;
+  phone: string;
+  service: string;
+  message: string;
+};
+
+const emptyForm: FormState = {
+  name: "",
+  email: "",
+  company: "",
+  phone: "",
+  service: "",
+  message: "",
+};
+
+export default function ContactPage() {
+  const [form, setForm] = useState<FormState>(emptyForm);
+  const [submitted, setSubmitted] = useState(false);
+
+  const onChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const onSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
+  const fieldClass =
+    "w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground transition-colors focus:border-navy-500 focus:outline-none focus:ring-2 focus:ring-navy-500/20";
+
+  return (
+    <>
+      <PageHero
+        eyebrow={contactDetails.eyebrow}
+        title={contactDetails.title}
+        lead={contactDetails.lead}
+      />
+
+      <Section className="!pt-14 md:!pt-16">
+        <Container>
+          <motion.div
+            variants={staggerContainer(0.1)}
+            initial="hidden"
+            whileInView="show"
+            viewport={defaultViewport}
+            className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14"
+          >
+            {/* Form */}
+            <motion.div variants={fadeUp}>
+              {submitted ? (
+                <div className="flex flex-col items-start rounded-3xl border border-emerald-500/25 bg-emerald-500/5 p-8 sm:p-10">
+                  <CheckCircle2 className="h-10 w-10 text-emerald-600 dark:text-emerald-400" />
+                  <h2 className="mt-4 font-display text-2xl font-semibold text-foreground">
+                    Message received
+                  </h2>
+                  <p className="mt-2 max-w-md text-muted-foreground">
+                    Thanks, {form.name || "there"}. We&apos;ll review what you
+                    shared and get back within one business day.
+                  </p>
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    className="mt-6"
+                    onClick={() => {
+                      setSubmitted(false);
+                      setForm(emptyForm);
+                    }}
+                  >
+                    Send another message
+                  </Button>
+                </div>
+              ) : (
+                <form
+                  onSubmit={onSubmit}
+                  className="rounded-3xl border border-border bg-surface/40 p-6 sm:p-8"
+                >
+                  <h2 className="font-display text-xl font-semibold text-foreground sm:text-2xl">
+                    Project inquiry
+                  </h2>
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    Fill in the details below — the more context, the better we
+                    can prepare.
+                  </p>
+
+                  <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                    <label className="block sm:col-span-1">
+                      <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                        Full name *
+                      </span>
+                      <input
+                        required
+                        name="name"
+                        value={form.name}
+                        onChange={onChange}
+                        autoComplete="name"
+                        className={fieldClass}
+                        // placeholder="Jane Cooper"
+                      />
+                    </label>
+                    <label className="block sm:col-span-1">
+                      <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                        Work email *
+                      </span>
+                      <input
+                        required
+                        type="email"
+                        name="email"
+                        value={form.email}
+                        onChange={onChange}
+                        autoComplete="email"
+                        className={fieldClass}
+                        // placeholder="jane@company.com"
+                      />
+                    </label>
+                    <label className="block">
+                      <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                        Company
+                      </span>
+                      <input
+                        name="company"
+                        value={form.company}
+                        onChange={onChange}
+                        autoComplete="organization"
+                        className={fieldClass}
+                        // placeholder="Acme Inc."
+                      />
+                    </label>
+                    <label className="block">
+                      <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                        Phone
+                      </span>
+                      <input
+                        type="tel"
+                        name="phone"
+                        value={form.phone}
+                        onChange={onChange}
+                        autoComplete="tel"
+                        className={fieldClass}
+                        placeholder="+971 …"
+                      />
+                    </label>
+                    <label className="block sm:col-span-2">
+                      <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                        Service interest *
+                      </span>
+                      <select
+                        required
+                        name="service"
+                        value={form.service}
+                        onChange={onChange}
+                        className={cn(fieldClass, "appearance-none")}
+                      >
+                        <option value="" disabled>
+                          Select a service
+                        </option>
+                        {contactDetails.serviceOptions.map((option) => (
+                          <option key={option} value={option}>
+                            {option}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                    <label className="block sm:col-span-2">
+                      <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                        Project details *
+                      </span>
+                      <textarea
+                        required
+                        name="message"
+                        value={form.message}
+                        onChange={onChange}
+                        rows={5}
+                        className={cn(fieldClass, "resize-y")}
+                        placeholder="What are you trying to build or improve? Timeline and budget range help too."
+                      />
+                    </label>
+                  </div>
+
+                  <Button type="submit" size="lg" className="mt-6 w-full sm:w-auto">
+                    Send message
+                    <Send className="h-4 w-4" />
+                  </Button>
+                </form>
+              )}
+            </motion.div>
+
+            {/* Contact details + map */}
+            <motion.aside variants={fadeUp} className="space-y-5">
+              <div className="rounded-3xl border border-border bg-background p-6 sm:p-7">
+                <h2 className="font-display text-lg font-semibold text-foreground">
+                  Contact details
+                </h2>
+                <ul className="mt-5 space-y-4 text-sm">
+                  <li className="flex gap-3">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-navy-600/10 text-navy-700 dark:text-navy-300">
+                      <Mail className="h-4 w-4" />
+                    </span>
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                        Email
+                      </p>
+                      <a
+                        href={`mailto:${contactDetails.email}`}
+                        className="mt-0.5 font-medium text-foreground hover:text-navy-600 dark:hover:text-navy-300"
+                      >
+                        {contactDetails.email}
+                      </a>
+                    </div>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-teal-500/10 text-teal-700 dark:text-teal-300">
+                      <Phone className="h-4 w-4" />
+                    </span>
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                        Phone
+                      </p>
+                      <a
+                        href={`tel:${contactDetails.phone.replace(/\s/g, "")}`}
+                        className="mt-0.5 font-medium text-foreground hover:text-navy-600 dark:hover:text-navy-300"
+                      >
+                        {contactDetails.phone}
+                      </a>
+                    </div>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-amber-500/10 text-amber-700 dark:text-amber-300">
+                      <Clock className="h-4 w-4" />
+                    </span>
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                        Hours
+                      </p>
+                      <p className="mt-0.5 font-medium text-foreground">
+                        {contactDetails.hours}
+                      </p>
+                    </div>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-rose-500/10 text-rose-700 dark:text-rose-300">
+                      <MapPin className="h-4 w-4" />
+                    </span>
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                        Location
+                      </p>
+                      <p className="mt-0.5 font-medium text-foreground">
+                        {contactDetails.location.name}
+                      </p>
+                      <p className="text-muted-foreground">
+                        {contactDetails.location.line1}
+                      </p>
+                      <p className="text-muted-foreground">
+                        {contactDetails.location.line2}
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="overflow-hidden rounded-3xl border border-border">
+                <iframe
+                  title="AirLabs Solutions location map"
+                  src={`https://maps.google.com/maps?q=${encodeURIComponent(
+                    contactDetails.location.mapQuery
+                  )}&t=&z=12&ie=UTF8&iwloc=&output=embed`}
+                  className="h-56 w-full border-0 grayscale-[20%] contrast-[1.05] dark:grayscale-[40%]"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+                <div className="border-t border-border bg-surface/50 px-4 py-3 text-xs text-muted-foreground">
+                  {contactDetails.location.line1},{" "}
+                  {contactDetails.location.line2}
+                </div>
+              </div>
+            </motion.aside>
+          </motion.div>
+        </Container>
+      </Section>
+    </>
+  );
+}
