@@ -52,11 +52,9 @@ export function StackedScroll({
     >
       <div ref={trackRef} className={cn("relative", className)}>
         {header}
-        <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <div className="relative mx-auto max-w-4xl px-4 pb-2 sm:px-6 lg:px-8">
           {children}
         </div>
-        {/* Lets the last card finish pinning before the next page section */}
-        <div className="h-[16vh] sm:h-[10vh]" aria-hidden />
       </div>
     </StackContext.Provider>
   );
@@ -106,7 +104,7 @@ export function ScrollStackCard({
       className={cn(
         // Native sticky — GPU scrolls the page; we don't scrub transforms
         // Compact sticky box — not full-bleed viewport height
-        "sticky top-[calc(4rem+2.75rem)] mx-auto mb-6 h-auto w-full sm:top-[calc(4.5rem+2.75rem)] sm:mb-8 lg:top-[calc(5rem+2.75rem)]",
+        "sticky top-[calc(4rem+2.75rem)] mx-auto mb-6 h-auto w-full last:mb-0 sm:top-[calc(4.5rem+2.75rem)] sm:mb-8 sm:last:mb-0 lg:top-[calc(5rem+2.75rem)]",
         className
       )}
       style={{ zIndex: index + 1 }}

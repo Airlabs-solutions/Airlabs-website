@@ -1,4 +1,4 @@
-export type HeroSlideId = "software" | "mobile" | "marketing";
+export type HeroSlideId = "software" | "mobile" | "ai" | "marketing";
 
 export interface HeroSlide {
   id: HeroSlideId;
@@ -31,6 +31,16 @@ export const heroSlides: HeroSlide[] = [
     ctaLabel: "Launch an app",
     accent: "#c5e14a",
     accentSoft: "rgba(197, 225, 74, 0.22)",
+  },
+  {
+    id: "ai",
+    label: "AI",
+    title: "AI built into the tools you already use",
+    description:
+      "ChatGPT, Gemini, and Claude wired into support, ops, and the internal tools your team opens every day.",
+    ctaLabel: "Add AI",
+    accent: "#6366f1",
+    accentSoft: "rgba(99, 102, 241, 0.18)",
   },
   {
     id: "marketing",

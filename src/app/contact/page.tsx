@@ -283,11 +283,10 @@ export default function ContactPage() {
               <div className="overflow-hidden rounded-3xl border border-border">
                 <iframe
                   title="AirLabs Solutions location map"
-                  src={`https://maps.google.com/maps?q=${encodeURIComponent(
-                    contactDetails.location.mapQuery
-                  )}&t=&z=12&ie=UTF8&iwloc=&output=embed`}
-                  className="h-56 w-full border-0 grayscale-[20%] contrast-[1.05] dark:grayscale-[40%]"
+                  src={contactDetails.location.mapEmbed}
+                  className="h-72 w-full border-0"
                   loading="lazy"
+                  allowFullScreen
                   referrerPolicy="no-referrer-when-downgrade"
                 />
                 <div className="border-t border-border bg-surface/50 px-4 py-3 text-xs text-muted-foreground">

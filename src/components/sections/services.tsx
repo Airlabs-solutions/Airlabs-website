@@ -25,7 +25,7 @@ export function Services() {
   return (
     <section
       id="services"
-      className="relative scroll-mt-24 bg-background"
+      className="relative scroll-mt-24 bg-charcoal-100 dark:bg-charcoal-900"
     >
       {services.map((service) => (
         <span
@@ -115,7 +115,7 @@ function StackChrome() {
   }, [n, reduceMotion, trackRef]);
 
   return (
-    <div className="sticky top-16 z-20 mx-auto flex max-w-4xl items-center justify-between gap-3 bg-background px-4 py-2.5 sm:top-[4.5rem] sm:px-6 lg:top-20 lg:px-8">
+    <div className="sticky top-16 z-20 mx-auto flex max-w-4xl items-center justify-between gap-3 bg-charcoal-100 px-4 py-2.5 dark:bg-charcoal-900 sm:top-[4.5rem] sm:px-6 lg:top-20 lg:px-8">
       <div className="flex min-w-0 items-center gap-3">
         <span className="font-mono text-[11px] font-bold tabular-nums text-navy-600 dark:text-navy-300">
           {String(activeIndex + 1).padStart(2, "0")} /{" "}
@@ -171,7 +171,7 @@ function ServiceCardPanel({
   return (
     <article
       className={cn(
-        "mx-auto flex max-w-xl flex-col rounded-2xl border border-border bg-surface p-5 shadow-md sm:p-6",
+        "mx-auto flex max-w-xl flex-col rounded-2xl border border-border bg-white p-5 shadow-md dark:bg-charcoal-950 sm:p-6",
         className
       )}
     >

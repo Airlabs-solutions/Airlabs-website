@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState, type ReactNode } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   Accessibility,
@@ -35,6 +36,8 @@ export function HeroShowcaseVisual({
       return <SoftwareShowcase accent={accent} />;
     case "mobile":
       return <MobileShowcase accent={accent} />;
+    case "ai":
+      return <AiShowcase accent={accent} />;
     case "marketing":
       return <MarketingShowcase accent={accent} />;
     default:
@@ -77,7 +80,7 @@ function SoftwareShowcase({ accent }: { accent: string }) {
   const reduce = useReducedMotion();
 
   return (
-    <div className="relative flex h-full min-h-[320px] w-full overflow-hidden rounded-3xl border border-slate-200/80 bg-[#f7f8fa] shadow-2xl sm:min-h-[380px]">
+    <div className="relative flex h-full min-h-0 w-full overflow-hidden rounded-3xl border border-slate-200/80 bg-[#f7f8fa] shadow-2xl">
       {/* Mini sidebar */}
       <aside
         aria-hidden
@@ -293,13 +296,14 @@ function MobileShowcase({ accent }: { accent: string }) {
   const reduce = useReducedMotion();
 
   return (
-    <div className="relative flex h-full min-h-[340px] w-full items-center justify-center bg-transparent py-2 sm:min-h-[400px]">
+    <div className="relative flex h-full min-h-0 w-full items-center justify-center overflow-hidden bg-transparent">
       {/* Soft floor shadow only — no outer card */}
       <div
         aria-hidden
-        className="pointer-events-none absolute bottom-6 h-8 w-40 rounded-[100%] bg-slate-900/20 blur-xl sm:w-48"
+        className="pointer-events-none absolute bottom-4 h-6 w-32 rounded-[100%] bg-slate-900/20 blur-xl sm:w-40"
       />
 
+      <div className="origin-center scale-[0.58] sm:scale-[0.68]">
       <motion.div
         initial={reduce ? false : { opacity: 0, y: 28 }}
         animate={{ opacity: 1, y: 0 }}
@@ -353,7 +357,7 @@ function MobileShowcase({ accent }: { accent: string }) {
                 Field Ops
               </p>
               <p className="mt-0.5 text-[9px] text-slate-500">
-                Dubai · Live routes
+                Saudi Arabia · Live routes
               </p>
             </div>
             <span className="flex h-7 w-7 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700">
@@ -448,6 +452,7 @@ function MobileShowcase({ accent }: { accent: string }) {
           </div>
         </div>
       </motion.div>
+      </div>
     </div>
   );
 }
@@ -456,7 +461,7 @@ function MarketingShowcase({ accent }: { accent: string }) {
   const reduce = useReducedMotion();
 
   return (
-    <div className="relative flex h-full min-h-[320px] w-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-amber-950 via-slate-950 to-emerald-950 p-4 shadow-2xl sm:min-h-[380px] sm:p-5">
+    <div className="relative flex h-full min-h-0 w-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-amber-950 via-slate-950 to-emerald-950 p-4 shadow-2xl sm:p-5">
       <div
         aria-hidden
         className="pointer-events-none absolute -bottom-10 right-0 h-44 w-44 rounded-full blur-3xl"
@@ -553,3 +558,254 @@ function MarketingShowcase({ accent }: { accent: string }) {
     </div>
   );
 }
+
+const AI_TEXT =
+  "Checked the open ticket and the last order. Drafted a reply in your support tone, and queued a follow-up.";
+
+const AI_TICK_MS = 26;
+const AI_THINK_TICKS = 28;
+const AI_IMAGE_TICKS = 42;
+const AI_HOLD_TICKS = 48;
+const AI_STREAM_START = AI_THINK_TICKS;
+const AI_IMAGE_START = AI_STREAM_START + AI_TEXT.length;
+const AI_HOLD_START = AI_IMAGE_START + AI_IMAGE_TICKS;
+const AI_TOTAL = AI_HOLD_START + AI_HOLD_TICKS;
+
+function AiShowcase({ accent }: { accent: string }) {
+  const reduce = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
+  const [tick, setTick] = useState(0);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+    if (reduce) {
+      setTick(AI_TOTAL);
+      return;
+    }
+    const id = window.setInterval(() => {
+      setTick((current) => (current >= AI_TOTAL ? 0 : current + 1));
+    }, AI_TICK_MS);
+    return () => window.clearInterval(id);
+  }, [mounted, reduce]);
+
+  const motionOff = mounted && !!reduce;
+  const thinking = !motionOff && tick < AI_STREAM_START;
+  const chars = motionOff
+    ? AI_TEXT.length
+    : Math.max(0, Math.min(AI_TEXT.length, tick - AI_STREAM_START));
+  const streaming = !motionOff && chars > 0 && chars < AI_TEXT.length;
+  const imageProgress = motionOff
+    ? 1
+    : tick < AI_IMAGE_START
+      ? 0
+      : Math.min(1, (tick - AI_IMAGE_START) / AI_IMAGE_TICKS);
+  const showImage = imageProgress > 0;
+  const generating = !motionOff && tick < AI_HOLD_START;
+  const status = thinking
+    ? "Thinking"
+    : streaming
+      ? "Writing"
+      : showImage && imageProgress < 1
+        ? "Creating image"
+        : "Ready";
+
+  return (
+    <div className="relative h-full min-h-0 w-full overflow-hidden rounded-3xl border border-slate-200/80 bg-[#eef0f6] shadow-2xl">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-8 top-0 h-32 w-32 rounded-full blur-3xl"
+        style={{ background: accent, opacity: 0.22 }}
+      />
+
+      <ModelChip
+        name="ChatGPT"
+        reduce={!mounted || !!reduce}
+        delay={0}
+        className="left-3 top-3"
+        mark={
+          <img
+            src="/logos/chatgpt.png"
+            alt=""
+            className="h-4 w-4 object-contain"
+          />
+        }
+      />
+      <ModelChip
+        name="Gemini"
+        reduce={!mounted || !!reduce}
+        delay={0.6}
+        className="right-3 top-8"
+        mark={<GeminiMark />}
+      />
+      <ModelChip
+        name="Claude"
+        reduce={!mounted || !!reduce}
+        delay={1.1}
+        className="bottom-4 left-5"
+        mark={
+          <img
+            src="/logos/claude.png"
+            alt=""
+            className="h-4 w-4 object-contain"
+          />
+        }
+      />
+
+      <div className="relative z-10 mx-auto flex h-full max-w-[17rem] flex-col px-3 py-3 sm:max-w-[19rem] sm:py-4">
+        <div className="flex min-h-0 flex-1 flex-col rounded-2xl border border-slate-200/80 bg-white p-3 shadow-lg">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-semibold text-slate-900">
+              Support assistant
+            </span>
+            <span className="inline-flex items-center gap-1 text-[10px] font-medium text-slate-500">
+              <motion.span
+                className="h-1.5 w-1.5 rounded-full"
+                style={{ backgroundColor: accent }}
+                animate={
+                  generating ? { opacity: [0.35, 1, 0.35] } : { opacity: 1 }
+                }
+                transition={
+                  generating
+                    ? { duration: 1.1, repeat: Infinity, ease: "easeInOut" }
+                    : undefined
+                }
+              />
+              {status}
+            </span>
+          </div>
+
+          <div className="mt-2.5 flex justify-end">
+            <p className="max-w-[88%] rounded-2xl rounded-br-md bg-slate-100 px-2.5 py-1.5 text-[10px] leading-snug text-slate-600">
+              Reply to the delayed shipment ticket
+            </p>
+          </div>
+
+          <div className="mt-2.5 min-h-0 flex-1 overflow-hidden">
+            {thinking ? (
+              <ThinkingDots />
+            ) : (
+              <p className="text-[11px] leading-snug text-slate-800">
+                {AI_TEXT.slice(0, chars)}
+                {streaming ? <Caret /> : null}
+              </p>
+            )}
+
+            {showImage ? <GeneratedImage progress={imageProgress} /> : null}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ThinkingDots() {
+  return (
+    <span className="inline-flex items-center gap-1 py-1" aria-hidden>
+      {[0, 1, 2].map((i) => (
+        <motion.span
+          key={i}
+          className="h-1.5 w-1.5 rounded-full bg-slate-400"
+          animate={{ y: [0, -3, 0], opacity: [0.35, 1, 0.35] }}
+          transition={{
+            duration: 0.7,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: i * 0.12,
+          }}
+        />
+      ))}
+    </span>
+  );
+}
+
+function Caret() {
+  return (
+    <motion.span
+      aria-hidden
+      className="ml-0.5 inline-block h-3 w-[2px] translate-y-[1px] bg-slate-800"
+      animate={{ opacity: [1, 0.15, 1] }}
+      transition={{ duration: 0.8, repeat: Infinity, ease: "easeInOut" }}
+    />
+  );
+}
+
+function GeneratedImage({ progress }: { progress: number }) {
+  const reveal = Math.min(1, progress / 0.32);
+  const shimmering = progress < 0.5;
+
+  return (
+    <div className="relative mt-2 h-[4.25rem] overflow-hidden rounded-xl bg-slate-100">
+      <div
+        className="absolute inset-0"
+        style={{
+          opacity: 0.35 + reveal * 0.65,
+          filter: `blur(${(1 - reveal) * 12}px)`,
+          transform: `scale(${1.08 - reveal * 0.08})`,
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-[#d7e8f7] via-[#f4efe4] to-[#e7d3b0]" />
+        <div className="absolute -right-2 top-1 h-8 w-8 rounded-full bg-white/80" />
+        <div className="absolute bottom-2 left-1/2 h-9 w-14 -translate-x-1/2 rounded-[4px] bg-[#c4843c] shadow-sm" />
+        <div className="absolute bottom-[2.55rem] left-1/2 h-3 w-14 -translate-x-1/2 bg-[#d7a15a] [clip-path:polygon(0_100%,50%_0,100%_100%)]" />
+        <div className="absolute bottom-2 left-1/2 h-9 w-px -translate-x-1/2 bg-[#8d5a24]/80" />
+        <div className="absolute bottom-[1.35rem] left-1/2 h-px w-14 -translate-x-1/2 bg-[#f3d7a6]/90" />
+      </div>
+      {shimmering ? (
+        <motion.div
+          aria-hidden
+          className="absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-white/75 to-transparent"
+          animate={{ x: ["-70%", "180%"] }}
+          transition={{ duration: 0.9, repeat: Infinity, ease: "easeInOut" }}
+        />
+      ) : null}
+    </div>
+  );
+}
+
+function ModelChip({
+  name,
+  mark,
+  className,
+  delay,
+  reduce,
+}: {
+  name: string;
+  mark: ReactNode;
+  className: string;
+  delay: number;
+  reduce: boolean;
+}) {
+  return (
+    <motion.div
+      className={cn(
+        "absolute z-20 flex items-center gap-1.5 rounded-full border border-white/80 bg-white px-2 py-1 shadow-md",
+        className
+      )}
+      animate={reduce ? undefined : { y: [0, -6, 0] }}
+      transition={
+        reduce
+          ? undefined
+          : { duration: 3.4, repeat: Infinity, ease: "easeInOut", delay }
+      }
+    >
+      {mark}
+      <span className="text-[10px] font-semibold text-slate-800">{name}</span>
+    </motion.div>
+  );
+}
+
+function GeminiMark() {
+  return (
+    <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" aria-hidden>
+      <path d="M8 1.2 9.2 6.2 14.2 8 9.2 9.8 8 14.8 6.8 9.8 1.8 8 6.8 6.2Z" fill="#4285F4" />
+      <path d="M8 1.2 6.8 6.2 1.8 8 6.8 6.8Z" fill="#EA4335" />
+      <path d="M8 14.8 9.2 9.8 14.2 8 9.2 9.2Z" fill="#FBBC04" />
+      <path d="M1.8 8 6.8 9.8 8 14.8 6.8 9.2Z" fill="#34A853" />
+    </svg>
+  );
+}
+

@@ -10,7 +10,7 @@ export function Process() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <Section id="process" className="bg-surface/40">
+    <Section id="process" className="bg-surface/40 pt-12 md:pt-16">
       <Container>
         <motion.div
           variants={staggerContainer(0.1)}

@@ -225,11 +225,12 @@ export function Hero() {
             aria-hidden
           />
 
-          <div className="relative overflow-hidden rounded-[1.75rem]">
+          <div className="relative h-[320px] overflow-hidden rounded-[1.75rem] sm:h-[380px]">
             <AnimatePresence mode="wait" custom={direction}>
               <motion.div
                 key={active.id}
                 custom={direction}
+                className="absolute inset-0"
                 initial={{ opacity: 0, x: 36 * direction }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -36 * direction }}

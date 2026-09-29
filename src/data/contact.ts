@@ -8,9 +8,10 @@ export const contactDetails = {
   hours: "Sat – Thursday, 9:00 AM – 6:00 PM",
   location: {
     name: "AirLabs Solutions",
-    line1: "123 Innovation Way, Suite 400",
-    line2: "Dubai, United Arab Emirates",
-    mapQuery: "Dubai United Arab Emirates",
+    line1: "4790 King Fahd Bin Abdulaziz Rd",
+    line2: "Riyad Bank Building, Aqrabiya 7598, Al Khobar 34441, Saudi Arabia",
+    mapEmbed:
+      "https://www.google.com/maps/embed?origin=mfe&pb=!1m4!3m2!1m1!4s5684675751542404430!6i17!3m1!1sen!5m1!1sen",
   },
   serviceOptions: [
     "Software Development",

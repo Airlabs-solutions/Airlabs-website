@@ -36,7 +36,7 @@ export function CTABanner() {
             variants={fadeUp}
             className="relative mx-auto mt-4 max-w-xl text-balance text-white/70"
           >
-            Tell us what you&apos;re trying to solve — we&apos;ll come back
+            Tell us what you&apos;re trying to solve, we&apos;ll come back
             with a plan, a timeline, and a straight answer on scope.
           </motion.p>
           <motion.div variants={fadeUp} className="relative mt-8">

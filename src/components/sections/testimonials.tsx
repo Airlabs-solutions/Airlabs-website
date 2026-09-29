@@ -49,13 +49,16 @@ const BLOOM_TABLET: BloomPose[] = [
   { x: 190, y: 210, rotate: 2 },
 ];
 
-/** Mobile: staggered 2-column cascade so each card clears the others */
+/**
+ * Mobile: two columns, three rows. Offsets clear a ~9.6rem card
+ * so nothing covers the quote or the name after the bloom.
+ */
 const BLOOM_MOBILE: BloomPose[] = [
-  { x: -86, y: -235, rotate: -2 },
-  { x: 86, y: -118, rotate: 2 },
-  { x: -86, y: 0, rotate: -1 },
-  { x: 86, y: 118, rotate: 2 },
-  { x: 0, y: 240, rotate: 0 },
+  { x: -88, y: -198, rotate: -1.5 },
+  { x: 88, y: -198, rotate: 1.5 },
+  { x: -88, y: 0, rotate: -1 },
+  { x: 88, y: 0, rotate: 1 },
+  { x: 0, y: 198, rotate: 0 },
 ];
 
 const variantStyles: Record<
@@ -184,14 +187,14 @@ function TestimonialCard({
             : { x, y, rotate, scale: scaleMv }
         }
         className={cn(
-          "w-[min(12.5rem,64vw)] rounded-3xl p-3.5 sm:w-[15rem] sm:p-5 lg:w-[16rem] lg:p-5",
+          "w-[9.6rem] rounded-3xl p-3 sm:w-[15rem] sm:p-5 lg:w-[16rem] lg:p-5",
           styles.card
         )}
       >
         <Stars className={styles.star} />
         <p
           className={cn(
-            "mt-2.5 line-clamp-4 text-[11px] leading-relaxed sm:mt-3 sm:line-clamp-5 sm:text-[13px] lg:line-clamp-5 lg:text-sm",
+            "mt-2 line-clamp-4 text-[11px] leading-snug sm:mt-3 sm:line-clamp-5 sm:text-[13px] sm:leading-relaxed lg:line-clamp-5 lg:text-sm",
             styles.quote
           )}
         >
@@ -288,8 +291,8 @@ export function Testimonials() {
               className={cn(
                 "relative mx-auto w-full max-w-6xl",
                 reduceMotion
-                  ? "h-[36rem] sm:h-[40rem] lg:h-[46rem]"
-                  : "h-[34rem] sm:h-[38rem] lg:h-[44rem]"
+                  ? "h-[40rem] sm:h-[40rem] lg:h-[46rem]"
+                  : "h-[40rem] sm:h-[38rem] lg:h-[44rem]"
               )}
               aria-label="Client testimonials"
             >
