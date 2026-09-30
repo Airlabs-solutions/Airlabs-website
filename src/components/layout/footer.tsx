@@ -85,8 +85,10 @@ export function Footer() {
                 </li>
               ))}
             </ul>
+          </div>
 
-            <h3 className="mt-8 text-sm font-semibold text-foreground">Contact</h3>
+          <div>
+            <h3 className="text-sm font-semibold text-foreground">Contact</h3>
             <ul className="mt-4 space-y-2.5 text-sm text-muted-foreground">
               <li className="flex items-start gap-2">
                 <Mail className="mt-0.5 h-4 w-4 shrink-0" />
@@ -101,10 +103,8 @@ export function Footer() {
                 4790 King Fahd Bin Abdulaziz Rd، Riyad Bank Building, Aqrabiya 7598, Al Khobar 34441, Kingdom of Saudi Arabia
               </li>
             </ul>
-          </div>
 
-          <div>
-            <h3 className="text-sm font-semibold text-foreground">Stay in the loop</h3>
+            <h3 className="mt-8 text-sm font-semibold text-foreground">Stay in the loop</h3>
             <p className="mt-4 text-sm text-muted-foreground">
               Occasional notes on what we&apos;re building, no spam.
             </p>
@@ -121,7 +121,7 @@ export function Footer() {
                 <button
                   type="submit"
                   aria-label="Subscribe"
-                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-navy-600 text-white transition-colors hover:bg-navy-700 dark:bg-navy-500 dark:hover:bg-navy-400"
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-navy-600 text-white transition-colors hover:bg-navy-700 dark:bg-navy-500 dark:hover:bg-navy-400"
                 >
                   <ArrowRight className="h-4 w-4" />
                 </button>

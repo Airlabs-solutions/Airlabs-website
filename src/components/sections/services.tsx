@@ -122,7 +122,7 @@ function StackChrome() {
           {String(n).padStart(2, "0")}
         </span>
         <div
-          className="hidden items-center gap-1.5 sm:flex"
+          className="hidden min-w-0 items-center gap-2 overflow-x-auto sm:flex"
           role="tablist"
           aria-label="Jump to service"
         >
@@ -130,18 +130,21 @@ function StackChrome() {
             <button
               key={service.slug}
               type="button"
-              aria-label={service.shortLabel}
-              aria-current={i === activeIndex}
+              role="tab"
+              aria-selected={i === activeIndex}
+              aria-current={i === activeIndex ? "true" : undefined}
               onClick={() =>
                 scrollToStackIndex(trackRef.current, i, n, "smooth")
               }
               className={cn(
-                "h-1.5 rounded-full",
+                "shrink-0 text-xs font-semibold",
                 i === activeIndex
-                  ? "w-6 bg-navy-600 dark:bg-navy-400"
-                  : "w-1.5 bg-border"
+                  ? "text-navy-600 dark:text-navy-300"
+                  : "text-muted-foreground hover:text-foreground"
               )}
-            />
+            >
+              {service.shortLabel}
+            </button>
           ))}
         </div>
         <span className="truncate text-xs font-semibold text-foreground sm:hidden">
@@ -171,7 +174,7 @@ function ServiceCardPanel({
   return (
     <article
       className={cn(
-        "mx-auto flex max-w-xl flex-col rounded-2xl border border-border bg-white p-5 shadow-md dark:bg-charcoal-950 sm:p-6",
+        "mx-auto flex max-w-3xl flex-col rounded-2xl border border-border bg-white p-5 shadow-md dark:bg-charcoal-950 sm:p-6",
         className
       )}
     >
@@ -187,10 +190,7 @@ function ServiceCardPanel({
             {service.title}
           </h3>
           {service.tagline && (
-            <p
-              className="mt-0.5 text-xs font-medium leading-snug"
-              style={{ color: service.accent }}
-            >
+            <p className="mt-0.5 text-xs font-medium leading-snug text-muted-foreground">
               {service.tagline}
             </p>
           )}
@@ -201,7 +201,7 @@ function ServiceCardPanel({
         {service.description}
       </p>
 
-      <ul className="mt-4 space-y-2">
+      <ul className="mt-4 space-y-2 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:space-y-0 sm:gap-y-2">
         {service.items.map((item) => (
           <li
             key={item}
@@ -219,7 +219,7 @@ function ServiceCardPanel({
       <Button
         href="/contact"
         size="md"
-        className="mt-6 w-fit text-sm shadow-none transition-none hover:!bg-navy-600 hover:!text-white dark:hover:!bg-navy-500"
+        className="mt-6 w-fit"
       >
         Quote for {service.shortLabel}
         <ArrowRight className="h-4 w-4 shrink-0" />

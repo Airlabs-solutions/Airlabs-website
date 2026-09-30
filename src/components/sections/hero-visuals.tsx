@@ -62,7 +62,7 @@ const crmRows = [
   },
   {
     name: "CRM onboard",
-    status: { label: "Working", className: "bg-amber-400 text-amber-950" },
+    status: { label: "Working", className: "bg-amber-400 text-slate-900" },
     channel: { label: "CRM", className: "bg-violet-500 text-white" },
     date: "Oct 28",
     type: "Workflow",
@@ -80,14 +80,14 @@ function SoftwareShowcase({ accent }: { accent: string }) {
   const reduce = useReducedMotion();
 
   return (
-    <div className="relative flex h-full min-h-0 w-full overflow-hidden rounded-3xl border border-slate-200/80 bg-[#f7f8fa] shadow-2xl">
+    <div className="relative flex h-full min-h-0 w-full overflow-hidden rounded-2xl border border-slate-200/80 bg-[#f7f8fa] shadow-2xl">
       {/* Mini sidebar */}
       <aside
         aria-hidden
         className="flex w-9 shrink-0 flex-col items-center gap-3 border-r border-slate-200/80 bg-white py-3 sm:w-10"
       >
         <span
-          className="flex h-6 w-6 items-center justify-center rounded-lg text-[10px] font-bold text-white"
+          className="flex h-6 w-6 items-center justify-center rounded-xl text-[10px] font-bold text-white"
           style={{ backgroundColor: accent }}
         >
           A
@@ -97,7 +97,7 @@ function SoftwareShowcase({ accent }: { accent: string }) {
             key={i}
             className={cn(
               "h-3.5 w-3.5",
-              i === 0 ? "text-slate-800" : "text-slate-400"
+              i === 0 ? "text-slate-900" : "text-slate-500"
             )}
           />
         ))}
@@ -109,8 +109,8 @@ function SoftwareShowcase({ accent }: { accent: string }) {
             <h3 className="font-display text-sm font-semibold tracking-tight text-slate-900 sm:text-base">
               Operations board
             </h3>
-            <div className="mt-1.5 flex gap-3 text-[10px] font-medium text-slate-400">
-              <span className="border-b-2 border-slate-800 pb-0.5 text-slate-800">
+            <div className="mt-1.5 flex gap-3 text-[10px] font-medium text-slate-500">
+              <span className="border-b-2 border-slate-800 pb-0.5 text-slate-900">
                 Main table
               </span>
               <span>Board</span>
@@ -126,13 +126,13 @@ function SoftwareShowcase({ accent }: { accent: string }) {
         </div>
 
         {/* Group */}
-        <div className="mt-3 flex items-center gap-1.5 text-[10px] font-semibold text-violet-600">
+        <div className="mt-3 flex items-center gap-1.5 text-[10px] font-semibold text-slate-900">
           <span className="text-[8px]">▼</span> Active deals
-          <span className="font-normal text-slate-400">4</span>
+          <span className="font-normal text-slate-500">4</span>
         </div>
 
         {/* Column headers */}
-        <div className="mt-1.5 grid grid-cols-[minmax(0,1.3fr)_0.7fr_0.7fr_0.55fr] gap-1 border-b border-slate-200 pb-1 text-[9px] font-medium uppercase tracking-wide text-slate-400 sm:grid-cols-[minmax(0,1.4fr)_0.75fr_0.75fr_0.6fr_0.7fr]">
+        <div className="mt-1.5 grid grid-cols-[minmax(0,1.3fr)_0.7fr_0.7fr_0.55fr] gap-1 border-b border-slate-200 pb-1 text-[9px] font-medium uppercase tracking-wide text-slate-500 sm:grid-cols-[minmax(0,1.4fr)_0.75fr_0.75fr_0.6fr_0.7fr]">
           <span>Task</span>
           <span>Status</span>
           <span>System</span>
@@ -150,13 +150,13 @@ function SoftwareShowcase({ accent }: { accent: string }) {
               transition={{ delay: 0.1 + i * 0.08, duration: 0.35, ease: EASE }}
               className="grid grid-cols-[minmax(0,1.3fr)_0.7fr_0.7fr_0.55fr] items-center gap-1 border-b border-slate-100 py-1.5 text-[10px] sm:grid-cols-[minmax(0,1.4fr)_0.75fr_0.75fr_0.6fr_0.7fr] sm:text-[11px]"
             >
-              <span className="truncate font-medium text-slate-800">
+              <span className="truncate font-medium text-slate-900">
                 {row.name}
               </span>
               <span>
                 <span
                   className={cn(
-                    "inline-flex rounded-md px-1.5 py-0.5 text-[9px] font-semibold sm:text-[10px]",
+                    "inline-flex rounded-xl px-1.5 py-0.5 text-[9px] font-semibold sm:text-[10px]",
                     row.status.className,
                     i === 0 && "ring-2 ring-emerald-300/80 ring-offset-1"
                   )}
@@ -167,7 +167,7 @@ function SoftwareShowcase({ accent }: { accent: string }) {
               <span>
                 <span
                   className={cn(
-                    "inline-flex rounded px-1.5 py-0.5 text-[9px] font-semibold sm:text-[10px]",
+                    "inline-flex rounded-xl px-1.5 py-0.5 text-[9px] font-semibold sm:text-[10px]",
                     row.channel.className
                   )}
                 >
@@ -181,13 +181,13 @@ function SoftwareShowcase({ accent }: { accent: string }) {
         </div>
 
         {/* Second group peek */}
-        <div className="mt-3 flex items-center gap-1.5 text-[10px] font-semibold text-sky-600">
+        <div className="mt-3 flex items-center gap-1.5 text-[10px] font-semibold text-slate-900">
           <span className="text-[8px]">▼</span> Closed this month
-          <span className="font-normal text-slate-400">2</span>
+          <span className="font-normal text-slate-500">2</span>
         </div>
         <div className="mt-1 grid grid-cols-[minmax(0,1.3fr)_0.7fr] items-center gap-1 border-b border-slate-100 py-1.5 text-[10px] opacity-60">
-          <span className="font-medium text-slate-700">Vendor portal</span>
-          <span className="inline-flex w-fit rounded-md bg-emerald-500 px-1.5 py-0.5 text-[9px] font-semibold text-white">
+          <span className="font-medium text-slate-500">Vendor portal</span>
+          <span className="inline-flex w-fit rounded-xl bg-emerald-500 px-1.5 py-0.5 text-[9px] font-semibold text-white">
             Done
           </span>
         </div>
@@ -233,7 +233,7 @@ function SoftwareShowcase({ accent }: { accent: string }) {
             <p className="truncate text-xs font-semibold text-slate-900 sm:text-sm">
               Dan, Ops Lead
             </p>
-            <p className="text-[10px] text-slate-400">Assigned · CRM onboard</p>
+            <p className="text-[10px] text-slate-500">Assigned · CRM onboard</p>
           </div>
           <motion.span
             className="shrink-0 rounded-full bg-gradient-to-r from-violet-400 to-sky-400 px-2.5 py-1 text-[10px] font-semibold text-white sm:px-3 sm:text-[11px]"
@@ -284,7 +284,7 @@ function SoftwareShowcase({ accent }: { accent: string }) {
                 ease: "easeInOut",
               }}
             />
-            <MousePointer2 className="relative h-5 w-5 fill-slate-800 text-slate-800 drop-shadow-md" />
+            <MousePointer2 className="relative h-5 w-5 fill-slate-800 text-slate-900 drop-shadow-md" />
           </motion.div>
         )}
       </div>
@@ -300,7 +300,7 @@ function MobileShowcase({ accent }: { accent: string }) {
       {/* Soft floor shadow only — no outer card */}
       <div
         aria-hidden
-        className="pointer-events-none absolute bottom-4 h-6 w-32 rounded-[100%] bg-slate-900/20 blur-xl sm:w-40"
+        className="pointer-events-none absolute bottom-4 h-6 w-32 rounded-full bg-slate-900/20 blur-xl sm:w-40"
       />
 
       <div className="origin-center scale-[0.58] sm:scale-[0.68]">
@@ -313,25 +313,25 @@ function MobileShowcase({ accent }: { accent: string }) {
         {/* Side buttons hint */}
         <span
           aria-hidden
-          className="absolute -left-[2px] top-24 h-8 w-[2px] rounded-l-sm bg-[#3a3a3c]"
+          className="absolute -left-[2px] top-24 h-8 w-[2px] rounded-full bg-[#3a3a3c]"
         />
         <span
           aria-hidden
-          className="absolute -left-[2px] top-36 h-12 w-[2px] rounded-l-sm bg-[#3a3a3c]"
+          className="absolute -left-[2px] top-36 h-12 w-[2px] rounded-full bg-[#3a3a3c]"
         />
         <span
           aria-hidden
-          className="absolute -right-[2px] top-28 h-16 w-[2px] rounded-r-sm bg-[#3a3a3c]"
+          className="absolute -right-[2px] top-28 h-16 w-[2px] rounded-full bg-[#3a3a3c]"
         />
 
-        <div className="relative overflow-hidden rounded-[1.95rem] bg-[#f3f3f5]">
+        <div className="relative overflow-hidden rounded-2xl bg-[#f3f3f5]">
           {/* Dynamic Island */}
           <div className="absolute left-1/2 top-2 z-20 h-[18px] w-[72px] -translate-x-1/2 rounded-full bg-black" />
 
           <div className="flex items-center justify-between px-4 pb-1 pt-3.5 text-[9px] font-semibold text-slate-900">
             <span>9:41</span>
             <span className="flex items-center gap-0.5 opacity-70">
-              <span className="h-1.5 w-3 rounded-[1px] border border-slate-900/80" />
+              <span className="h-1.5 w-3 rounded-full border border-slate-900/80" />
             </span>
           </div>
 
@@ -348,7 +348,7 @@ function MobileShowcase({ accent }: { accent: string }) {
                 airlabs
               </span>
             </div>
-            <MoreHorizontal className="h-4 w-4 text-slate-700" />
+            <MoreHorizontal className="h-4 w-4 text-slate-500" />
           </div>
 
           <div className="mt-3 flex items-start justify-between px-3.5">
@@ -360,7 +360,7 @@ function MobileShowcase({ accent }: { accent: string }) {
                 Saudi Arabia · Live routes
               </p>
             </div>
-            <span className="flex h-7 w-7 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700">
+            <span className="flex h-7 w-7 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-500">
               <SlidersHorizontal className="h-3.5 w-3.5" />
             </span>
           </div>
@@ -394,14 +394,14 @@ function MobileShowcase({ accent }: { accent: string }) {
                     card.img
                   )}
                 >
-                  <span className="absolute left-1.5 top-1.5 rounded-full bg-white/95 px-1.5 py-0.5 text-[7px] font-medium text-slate-600">
+                  <span className="absolute left-1.5 top-1.5 rounded-full bg-white/95 px-1.5 py-0.5 text-[7px] font-medium text-slate-500">
                     Official partner
                   </span>
                   <span className="absolute bottom-1.5 right-1.5 flex items-center gap-0.5 rounded-full bg-white/95 px-1.5 py-0.5">
                     {Array.from({ length: 4 }).map((_, s) => (
                       <Star
                         key={s}
-                        className="h-2 w-2 fill-amber-400 text-amber-400"
+                        className="h-2 w-2 fill-slate-900 text-slate-900"
                       />
                     ))}
                   </span>
@@ -411,7 +411,7 @@ function MobileShowcase({ accent }: { accent: string }) {
                     {card.title}
                   </p>
                   <p className="mt-0.5 text-[8px] text-slate-500">{card.meta}</p>
-                  <div className="mt-1.5 flex gap-2 text-slate-700">
+                  <div className="mt-1.5 flex gap-2 text-slate-500">
                     <Accessibility className="h-2.5 w-2.5" />
                     <Utensils className="h-2.5 w-2.5" />
                     <Wifi className="h-2.5 w-2.5" />
@@ -422,14 +422,14 @@ function MobileShowcase({ accent }: { accent: string }) {
                       <p className="text-[11px] font-bold text-slate-900">
                         {card.price}
                       </p>
-                      <p className="text-[7px] leading-tight text-slate-400">
+                      <p className="text-[7px] leading-tight text-slate-500">
                         per visit
                         <br />
                         Inc. fees
                       </p>
                     </div>
                     <motion.span
-                      className="rounded-md px-2 py-1.5 text-[8px] font-bold text-slate-900"
+                      className="rounded-xl px-2 py-1.5 text-[8px] font-bold text-slate-900"
                       style={{ backgroundColor: accent }}
                       animate={
                         reduce || i !== 0
@@ -461,7 +461,7 @@ function MarketingShowcase({ accent }: { accent: string }) {
   const reduce = useReducedMotion();
 
   return (
-    <div className="relative flex h-full min-h-0 w-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-amber-950 via-slate-950 to-emerald-950 p-4 shadow-2xl sm:p-5">
+    <div className="relative flex h-full min-h-0 w-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-amber-950 via-slate-950 to-emerald-950 p-4 shadow-2xl sm:p-5">
       <div
         aria-hidden
         className="pointer-events-none absolute -bottom-10 right-0 h-44 w-44 rounded-full blur-3xl"
@@ -470,12 +470,12 @@ function MarketingShowcase({ accent }: { accent: string }) {
 
       <div className="relative z-10 flex items-center justify-between border-b border-white/10 pb-3">
         <div className="flex items-center gap-2">
-          <Megaphone className="h-4 w-4 text-amber-300" />
-          <span className="text-xs font-semibold text-white/90">
+          <Megaphone className="h-4 w-4 text-white" />
+          <span className="text-xs font-semibold text-white">
             Growth dashboard
           </span>
         </div>
-        <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/15 px-2 py-0.5 text-[10px] font-semibold text-emerald-300">
+        <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/15 px-2 py-0.5 text-[10px] font-semibold text-white/70">
           <Activity className="h-3 w-3" /> Live loop
         </span>
       </div>
@@ -487,9 +487,9 @@ function MarketingShowcase({ accent }: { accent: string }) {
           transition={{ delay: 0.15, duration: 0.4, ease: EASE }}
           className="rounded-xl border border-white/10 bg-white/5 p-3"
         >
-          <p className="text-[10px] text-slate-400">Inbound leads</p>
+          <p className="text-[10px] text-white/70">Inbound leads</p>
           <p className="mt-1 font-display text-2xl font-semibold text-white">+248%</p>
-          <p className="text-[10px] text-emerald-300">QoQ growth</p>
+          <p className="text-[10px] text-white/70">QoQ growth</p>
         </motion.div>
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 12 }}
@@ -497,9 +497,9 @@ function MarketingShowcase({ accent }: { accent: string }) {
           transition={{ delay: 0.25, duration: 0.4, ease: EASE }}
           className="rounded-xl border border-white/10 bg-white/5 p-3"
         >
-          <p className="text-[10px] text-slate-400">ROAS</p>
+          <p className="text-[10px] text-white/70">ROAS</p>
           <p className="mt-1 font-display text-2xl font-semibold text-amber-300">3.8x</p>
-          <p className="text-[10px] text-slate-400">Verified</p>
+          <p className="text-[10px] text-white/70">Verified</p>
         </motion.div>
       </div>
 
@@ -509,11 +509,11 @@ function MarketingShowcase({ accent }: { accent: string }) {
         transition={{ delay: 0.35, duration: 0.45 }}
         className="relative z-10 mt-3 flex-1 rounded-xl border border-white/10 bg-white/[0.03] p-3"
       >
-        <div className="mb-2 flex items-center justify-between text-[10px] text-slate-400">
+        <div className="mb-2 flex items-center justify-between text-[10px] text-white/70">
           <span className="flex items-center gap-1">
-            <TrendingUp className="h-3 w-3 text-emerald-400" /> Traffic curve
+            <TrendingUp className="h-3 w-3 text-white/70" /> Traffic curve
           </span>
-          <span className="text-emerald-300">All-time high</span>
+          <span className="text-white/70">All-time high</span>
         </div>
         <svg className="h-20 w-full" viewBox="0 0 280 70" fill="none">
           <defs>
@@ -549,7 +549,7 @@ function MarketingShowcase({ accent }: { accent: string }) {
             initial={reduce ? false : { opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7 + i * 0.1, duration: 0.35, ease: EASE }}
-            className="rounded-full border border-amber-400/30 bg-amber-400/10 px-2.5 py-1 text-[10px] font-semibold text-amber-200"
+            className="rounded-full border border-amber-400/30 bg-amber-400/10 px-2.5 py-1 text-[10px] font-semibold text-white"
           >
             {tag}
           </motion.span>
@@ -614,7 +614,7 @@ function AiShowcase({ accent }: { accent: string }) {
         : "Ready";
 
   return (
-    <div className="relative h-full min-h-0 w-full overflow-hidden rounded-3xl border border-slate-200/80 bg-[#eef0f6] shadow-2xl">
+    <div className="relative h-full min-h-0 w-full overflow-hidden rounded-2xl border border-slate-200/80 bg-[#eef0f6] shadow-2xl">
       <div
         aria-hidden
         className="pointer-events-none absolute -right-8 top-0 h-32 w-32 rounded-full blur-3xl"
@@ -679,7 +679,7 @@ function AiShowcase({ accent }: { accent: string }) {
           </div>
 
           <div className="mt-2.5 flex justify-end">
-            <p className="max-w-[88%] rounded-2xl rounded-br-md bg-slate-100 px-2.5 py-1.5 text-[10px] leading-snug text-slate-600">
+            <p className="max-w-[88%] rounded-xl bg-slate-100 px-2.5 py-1.5 text-xs leading-snug text-slate-500">
               Reply to the delayed shipment ticket
             </p>
           </div>
@@ -688,7 +688,7 @@ function AiShowcase({ accent }: { accent: string }) {
             {thinking ? (
               <ThinkingDots />
             ) : (
-              <p className="text-[11px] leading-snug text-slate-800">
+              <p className="text-xs leading-snug text-slate-800">
                 {AI_TEXT.slice(0, chars)}
                 {streaming ? <Caret /> : null}
               </p>
@@ -749,7 +749,7 @@ function GeneratedImage({ progress }: { progress: number }) {
       >
         <div className="absolute inset-0 bg-gradient-to-b from-[#d7e8f7] via-[#f4efe4] to-[#e7d3b0]" />
         <div className="absolute -right-2 top-1 h-8 w-8 rounded-full bg-white/80" />
-        <div className="absolute bottom-2 left-1/2 h-9 w-14 -translate-x-1/2 rounded-[4px] bg-[#c4843c] shadow-sm" />
+        <div className="absolute bottom-2 left-1/2 h-9 w-14 -translate-x-1/2 rounded-xl bg-[#c4843c] shadow-sm" />
         <div className="absolute bottom-[2.55rem] left-1/2 h-3 w-14 -translate-x-1/2 bg-[#d7a15a] [clip-path:polygon(0_100%,50%_0,100%_100%)]" />
         <div className="absolute bottom-2 left-1/2 h-9 w-px -translate-x-1/2 bg-[#8d5a24]/80" />
         <div className="absolute bottom-[1.35rem] left-1/2 h-px w-14 -translate-x-1/2 bg-[#f3d7a6]/90" />
@@ -793,7 +793,7 @@ function ModelChip({
       }
     >
       {mark}
-      <span className="text-[10px] font-semibold text-slate-800">{name}</span>
+      <span className="text-[10px] font-semibold text-slate-900">{name}</span>
     </motion.div>
   );
 }

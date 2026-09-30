@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/data/seo";
 
-export const metadata: Metadata = {
-  title: "Contact us — AirLabs Solutions",
+export const metadata = pageMetadata({
+  title: "Contact us",
   description:
-    "Get in touch with AirLabs Solutions — send a project inquiry or reach us by email, phone, or visit our location.",
-};
+    "Contact AirLabs Solutions in Al Khobar by email, phone, or a visit to the Riyad Bank Building on King Fahd Bin Abdulaziz Rd.",
+  path: "/contact",
+});
 
 export default function ContactLayout({
   children,

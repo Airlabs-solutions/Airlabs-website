@@ -1,0 +1,25 @@
+# AirLabs Solutions
+
+> AirLabs Solutions is a full-stack IT company in Al Khobar, Saudi Arabia. It designs, builds, and supports custom software, mobile apps, AI automation, websites, digital marketing, and IT infrastructure for growing businesses.
+
+AirLabs works as one team across product, growth, and infrastructure, from the Riyad Bank Building at 4790 King Fahd Bin Abdulaziz Rd, Aqrabiya, Al Khobar 34441. Contact: info@airlabss.com, +966 551076120. Hours: Saturday–Thursday, 9:00–18:00.
+
+## Pages
+
+- [Home](https://www.airlabss.com/): Overview of services, process, and proof for businesses in Saudi Arabia.
+- [Services](https://www.airlabss.com/services): Software, mobile, AI automation, web, digital marketing, and IT infrastructure.
+- [About](https://www.airlabss.com/about): Who AirLabs is and how the team works.
+- [Contact](https://www.airlabss.com/contact): Project inquiry, email, phone, and the Al Khobar office.
+
+## Services
+
+- [Software Development](https://www.airlabss.com/services#software-development): Custom software, business systems, enterprise platforms, and API integrations.
+- [Mobile App Development](https://www.airlabss.com/services#mobile-app-development): iOS, Android, and cross-platform apps, including UI/UX and ongoing support.
+- [Automation and AI](https://www.airlabss.com/services#automation-ai): WhatsApp and chatbot automation, workflow automation, AI integration, and CRM automation.
+- [Web Development](https://www.airlabss.com/services#web-development): Marketing sites, dynamic sites, e-commerce, Shopify, and custom web applications.
+- [Digital Marketing](https://www.airlabss.com/services#digital-marketing): SEO, generative engine optimization (GEO), social, paid media, and conversion work.
+- [IT Infrastructure](https://www.airlabss.com/services#it-infrastructure): Hardware, licensing, networking, CCTV, and smart-office systems.
+
+## Keywords
+
+IT company Al Khobar, software development Saudi Arabia, custom software development Khobar, mobile app development KSA, AI automation Saudi Arabia, web development Al Khobar, digital marketing Eastern Province, IT infrastructure Al Khobar.

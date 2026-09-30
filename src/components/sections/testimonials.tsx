@@ -254,7 +254,7 @@ export function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="relative bg-background py-16 sm:py-20 lg:py-24"
+      className="relative bg-background py-12 sm:py-16"
     >
       <Container>
         <motion.div
@@ -264,7 +264,7 @@ export function Testimonials() {
           viewport={defaultViewport}
           className="mx-auto max-w-2xl text-center"
         >
-          <span className="text-xs font-medium uppercase tracking-wider text-navy-600 dark:text-navy-300">
+          <span className="text-xs font-medium text-navy-600 dark:text-navy-300">
             What clients say
           </span>
           <h2 className="mt-3 text-balance font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
@@ -276,7 +276,7 @@ export function Testimonials() {
       <div
         ref={trackRef}
         className="relative mt-6 sm:mt-8"
-        style={{ height: reduceMotion ? "auto" : "280vh" }}
+        style={{ height: reduceMotion ? "auto" : "200vh" }}
       >
         <div
           className={cn(

@@ -20,12 +20,21 @@ export function LogoMarquee() {
               key={`${client.name}-${i}`}
               className={`relative shrink-0 ${client.className}`}
             >
-              <Image
-                src={client.src}
-                alt={`${client.name} logo`}
-                fill
-                className="object-contain"
-              />
+              {client.src.endsWith(".svg") ? (
+                // next/image does not optimize SVGs, so this one is served as-is.
+                <img
+                  src={client.src}
+                  alt={`${client.name} logo`}
+                  className="h-full w-full object-contain"
+                />
+              ) : (
+                <Image
+                  src={client.src}
+                  alt={`${client.name} logo`}
+                  fill
+                  className="object-contain"
+                />
+              )}
             </div>
           ))}
         </div>

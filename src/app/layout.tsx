@@ -2,6 +2,15 @@ import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { JsonLd } from "@/components/seo/json-ld";
+import {
+  business,
+  defaultDescription,
+  defaultTitle,
+  keywords,
+  siteName,
+  siteUrl,
+} from "@/data/seo";
 import "./globals.css";
 
 const sans = Inter({
@@ -19,9 +28,30 @@ const display = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "AirLabs Solutions — Modern IT Services & Software Engineering",
-  description:
-    "AirLabs Solutions builds web, software, mobile, AI automation, digital marketing, and IT infrastructure solutions for growing businesses.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: defaultTitle,
+    template: `%s — ${siteName}`,
+  },
+  description: defaultDescription,
+  keywords,
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: defaultTitle,
+    description: defaultDescription,
+    url: "/",
+    siteName,
+    locale: "en_US",
+    type: "website",
+    images: [{ url: business.logoPath, alt: siteName }],
+  },
+  twitter: {
+    card: "summary",
+    title: defaultTitle,
+    description: defaultDescription,
+    images: [business.logoPath],
+  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({
@@ -43,6 +73,7 @@ export default function RootLayout({
       <body
         className={`${sans.variable} ${display.variable} font-sans font-normal`}
       >
+        <JsonLd />
         <Navbar />
         <main>{children}</main>
         <Footer />

@@ -199,7 +199,7 @@ export function Hero() {
             variants={textChild}
             className="mt-4 text-xs text-muted-foreground"
           >
-            Full-stack IT partner — software, mobile, marketing, and more under
+            Full-stack IT partner: software, mobile, marketing, and more under
             one roof.
           </motion.p>
         </motion.div>
@@ -220,7 +220,7 @@ export function Hero() {
           }}
         >
           <div
-            className="absolute -inset-3 rounded-[2rem] opacity-60 blur-2xl transition-colors duration-500 sm:-inset-4"
+            className="pointer-events-none absolute -inset-3 rounded-[2rem] opacity-60 blur-2xl transition-colors duration-500 sm:-inset-4"
             style={{ background: active.accentSoft }}
             aria-hidden
           />
@@ -245,13 +245,13 @@ export function Hero() {
           </div>
 
           {/* Stage controls */}
-          <div className="mt-4 flex items-center justify-between gap-3">
+          <div className="relative z-10 mt-4 flex items-center gap-3">
             <div className="flex gap-2">
               <button
                 type="button"
                 aria-label="Previous showcase"
                 onClick={prev}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface/80 text-foreground backdrop-blur transition-colors hover:border-navy-500 hover:text-navy-600 dark:hover:text-navy-300"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-navy-600 text-white transition-colors hover:bg-navy-700 dark:bg-navy-500 dark:hover:bg-navy-400"
               >
                 <ArrowLeft className="h-4 w-4" />
               </button>
@@ -259,7 +259,7 @@ export function Hero() {
                 type="button"
                 aria-label="Next showcase"
                 onClick={next}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface/80 text-foreground backdrop-blur transition-colors hover:border-navy-500 hover:text-navy-600 dark:hover:text-navy-300"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-navy-600 text-white transition-colors hover:bg-navy-700 dark:bg-navy-500 dark:hover:bg-navy-400"
               >
                 <ArrowRight className="h-4 w-4" />
               </button>
@@ -274,8 +274,8 @@ export function Hero() {
                   aria-current={i === index}
                   onClick={() => goTo(i, i > index ? 1 : -1)}
                   className={cn(
-                    "h-1.5 rounded-full transition-all duration-300",
-                    i === index ? "w-7" : "w-1.5 bg-border hover:bg-muted-foreground/40"
+                    "h-3 rounded-full transition-all duration-300",
+                    i === index ? "w-8" : "w-3 bg-border hover:bg-muted-foreground/40"
                   )}
                   style={i === index ? { backgroundColor: active.accent } : undefined}
                 />
