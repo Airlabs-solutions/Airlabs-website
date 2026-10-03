@@ -34,7 +34,9 @@ export function Footer() {
             <Logo height={34} />
             <p className="mt-4 max-w-xs text-sm text-muted-foreground">
               A full-stack IT partner for web, software, mobile, AI automation,
-              digital marketing, and infrastructure, under one roof.
+              digital marketing, and infrastructure, under one roof. Software
+              is reviewed before launch, and data is stored with encryption
+              and limited access.
             </p>
             <div className="mt-6 flex gap-3">
               {socials.map(({ label, icon: Icon, href }) => (

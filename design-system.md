@@ -77,8 +77,9 @@ transitions, so easing/duration stay consistent site-wide:
 - `fadeUp` — opacity + 28px rise, the default scroll-reveal
 - `staggerContainer(stagger, delayChildren)` — wrap groups of `fadeUp`
   children
-- `defaultViewport` — `{ once: true, amount: 0.3 }`, the standard
-  `whileInView` viewport config
+- `defaultViewport` — `{ once: true, amount: "some" }`, the standard
+  `whileInView` viewport config. Any visible part of the block starts the
+  reveal, so tall sections are not stuck invisible on a short screen.
 - Shared ease curve: `EASE = [0.22, 1, 0.36, 1]`
 
 ## Logo & peak motif

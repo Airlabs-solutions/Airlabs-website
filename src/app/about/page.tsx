@@ -1,13 +1,19 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Check } from "lucide-react";
+import { Check, ClipboardCheck, LockKeyhole, ShieldCheck } from "lucide-react";
 import { PageHero } from "@/components/ui/page-hero";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { aboutContent } from "@/data/about";
 import { defaultViewport, fadeUp, staggerContainer } from "@/lib/motion";
+
+const securityIcons = {
+  build: ShieldCheck,
+  review: ClipboardCheck,
+  data: LockKeyhole,
+} as const;
 
 export default function AboutPage() {
   return (
@@ -18,7 +24,7 @@ export default function AboutPage() {
         lead={aboutContent.lead}
       />
 
-      <Section className="!pt-16 md:!pt-20">
+      <Section className="!pb-0 !pt-16 md:!pt-20">
         <Container>
           <motion.div
             variants={staggerContainer(0.1)}
@@ -60,6 +66,49 @@ export default function AboutPage() {
         </Container>
       </Section>
 
+      <Section className="!py-16 md:!py-20">
+        <Container>
+          <motion.div
+            variants={staggerContainer(0.08)}
+            initial="hidden"
+            whileInView="show"
+            viewport={defaultViewport}
+          >
+            <motion.h2
+              variants={fadeUp}
+              className="font-display text-2xl font-semibold tracking-tight text-foreground sm:text-3xl"
+            >
+              {aboutContent.security.title}
+            </motion.h2>
+            <motion.p
+              variants={fadeUp}
+              className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground"
+            >
+              {aboutContent.security.lead}
+            </motion.p>
+
+            <div className="mt-12 grid gap-10 md:grid-cols-3 md:gap-8">
+              {aboutContent.security.items.map((item) => {
+                const Icon = securityIcons[item.key];
+                return (
+                  <motion.div key={item.key} variants={fadeUp}>
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-navy-600/10 text-navy-700 dark:text-navy-300">
+                      <Icon className="h-4 w-4" aria-hidden />
+                    </span>
+                    <h3 className="mt-4 font-display text-lg font-semibold text-foreground">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                      {item.detail}
+                    </p>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </motion.div>
+        </Container>
+      </Section>
+
       <Section className="border-y border-border bg-surface/40 !py-20 md:!py-24">
         <Container>
           <motion.div
@@ -87,7 +136,7 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      <Section>
+      <Section className="!pt-16 md:!pt-20">
         <Container>
           <motion.div
             variants={staggerContainer(0.08)}

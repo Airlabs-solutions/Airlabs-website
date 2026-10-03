@@ -8,7 +8,7 @@ export const defaultTitle =
   "AirLabs Solutions — IT Services & Software Engineering in Al Khobar";
 
 export const defaultDescription =
-  "AirLabs Solutions in Al Khobar builds custom software, mobile apps, AI automation, websites, digital marketing, and IT infrastructure for businesses across Saudi Arabia.";
+  "AirLabs Solutions in Al Khobar builds custom software, mobile apps, AI automation, web apps, digital marketing, and IT infrastructure for businesses across Saudi Arabia.";
 
 /** Real services and location. Used in metadata and llms.txt, not as a dump of unrelated terms. */
 export const keywords = [

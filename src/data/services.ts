@@ -24,6 +24,7 @@ export const services: ServiceCategory[] = [
       "Purpose-built workflows instead of forced SaaS compromises",
       "Clean APIs and integrations across your existing stack",
       "Production-grade reliability, roles, and observability",
+      "Security review before launch, with data encrypted and access limited to the people who need it",
     ],
     accent: "#0d9488",
     icon: Server,

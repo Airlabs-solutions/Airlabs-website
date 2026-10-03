@@ -31,7 +31,10 @@ const emptyForm: FormState = {
 
 export default function ContactPage() {
   const [form, setForm] = useState<FormState>(emptyForm);
+  const [website, setWebsite] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
 
   const onChange = (
     e: React.ChangeEvent<
@@ -42,9 +45,30 @@ export default function ContactPage() {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setError("");
+    setSending(true);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, website }),
+      });
+      if (!response.ok) {
+        setError(
+          `We couldn't send that. Email ${contactDetails.email} and we'll pick it up.`
+        );
+        return;
+      }
+      setSubmitted(true);
+    } catch {
+      setError(
+        `We couldn't send that. Email ${contactDetails.email} and we'll pick it up.`
+      );
+    } finally {
+      setSending(false);
+    }
   };
 
   const fieldClass =
@@ -85,6 +109,7 @@ export default function ContactPage() {
                     className="mt-6"
                     onClick={() => {
                       setSubmitted(false);
+                      setError("");
                       setForm(emptyForm);
                     }}
                   >
@@ -94,8 +119,18 @@ export default function ContactPage() {
               ) : (
                 <form
                   onSubmit={onSubmit}
-                  className="rounded-3xl border border-border bg-surface/40 p-6 sm:p-8"
+                  className="relative rounded-3xl border border-border bg-surface/40 p-6 sm:p-8"
                 >
+                  <input
+                    type="text"
+                    name="website"
+                    value={website}
+                    onChange={(e) => setWebsite(e.target.value)}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden
+                    className="absolute left-[-9999px] h-0 w-0 opacity-0"
+                  />
                   <h2 className="font-display text-xl font-semibold text-foreground sm:text-2xl">
                     Project inquiry
                   </h2>
@@ -121,7 +156,7 @@ export default function ContactPage() {
                     </label>
                     <label className="block sm:col-span-1">
                       <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                        Work email *
+                        Email *
                       </span>
                       <input
                         required
@@ -158,7 +193,7 @@ export default function ContactPage() {
                         onChange={onChange}
                         autoComplete="tel"
                         className={fieldClass}
-                        placeholder="+971 …"
+                        placeholder="+966 …"
                       />
                     </label>
                     <label className="block sm:col-span-2">
@@ -184,10 +219,9 @@ export default function ContactPage() {
                     </label>
                     <label className="block sm:col-span-2">
                       <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                        Project details *
+                        Project details
                       </span>
                       <textarea
-                        required
                         name="message"
                         value={form.message}
                         onChange={onChange}
@@ -198,8 +232,19 @@ export default function ContactPage() {
                     </label>
                   </div>
 
-                  <Button type="submit" size="lg" className="mt-6 w-full sm:w-auto">
-                    Send message
+                  {error ? (
+                    <p className="mt-6 text-sm text-foreground" role="alert">
+                      {error}
+                    </p>
+                  ) : null}
+
+                  <Button
+                    type="submit"
+                    size="lg"
+                    className="mt-6 w-full sm:w-auto"
+                    disabled={sending}
+                  >
+                    {sending ? "Sending…" : "Send message"}
                     <Send className="h-4 w-4" />
                   </Button>
                 </form>

@@ -23,5 +23,10 @@ export const staggerContainer = (stagger = 0.12, delayChildren = 0): Variants =>
   },
 });
 
-/** Default viewport config for whileInView — fires once, slightly before fully in view. */
-export const defaultViewport = { once: true, amount: 0.3 } as const;
+/**
+ * Default viewport config for whileInView.
+ * "some" reveals as soon as any part is on screen. A percentage threshold
+ * keeps tall blocks (the contact form, service sections) invisible on mobile
+ * until the user scrolls, because 30% of the block is taller than the viewport.
+ */
+export const defaultViewport = { once: true, amount: "some" } as const;

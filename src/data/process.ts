@@ -32,7 +32,7 @@ export const processSteps: ProcessStep[] = [
     step: "04",
     title: "Launch & support",
     description:
-      "Go-live, handover, and a named person to call when something needs a change.",
+      "Go-live with a security pass — access, data handling, and review — then handover and a named person when something needs a change.",
     youGet: "A system you can run, plus a support path.",
   },
 ];
