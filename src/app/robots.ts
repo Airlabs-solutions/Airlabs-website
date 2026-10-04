@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { siteUrl } from "@/data/seo";
 
-const allowAll = { allow: "/" } as const;
+const allowAll = { allow: "/", disallow: "/card" } as const;
 
 export default function robots(): MetadataRoute.Robots {
   return {

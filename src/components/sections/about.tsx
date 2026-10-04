@@ -24,17 +24,17 @@ export function About() {
           initial="hidden"
           whileInView="show"
           viewport={defaultViewport}
-          className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20"
+          className="grid items-center gap-12 lg:grid-cols-[24rem_1fr] lg:gap-16"
         >
           <motion.div
             variants={fadeUp}
-            className="relative aspect-[3/4] overflow-hidden rounded-[2rem] border border-border"
+            className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-[2rem] border border-border lg:max-w-none"
           >
             <Image
               src="/about/studio.webp"
               alt="Engineers working together in the AirLabs studio"
               fill
-              sizes="(min-width: 1024px) 40vw, 100vw"
+              sizes="384px"
               className="object-cover"
             />
           </motion.div>

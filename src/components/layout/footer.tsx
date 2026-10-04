@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { SiFacebook, SiInstagram, SiX } from "react-icons/si";
 import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 import { Logo } from "@/components/ui/logo";
@@ -17,8 +18,11 @@ const socials = [
 ];
 
 export function Footer() {
+  const pathname = usePathname();
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+
+  if (pathname === "/card") return null;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

@@ -5,8 +5,8 @@ export const clientLogos = [
     className: "h-12 w-16 sm:h-14 sm:w-16",
   },
   {
-    name: "ABB",
-    src: "/clients/abb.png",
+    name: "Mazin",
+    src: "/clients/mazin-logo.png",
     className: "h-12 w-40 sm:h-14 sm:w-40",
   },
   {

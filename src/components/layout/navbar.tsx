@@ -42,6 +42,8 @@ export function Navbar() {
     setServicesOpen(false);
   }, [pathname]);
 
+  if (pathname === "/card") return null;
+
   const linkClass = (href: string) =>
     cn(
       "rounded-full px-4 py-2 text-sm font-medium transition-colors",
