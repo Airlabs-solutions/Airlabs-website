@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { Analytics } from "@/components/seo/analytics";
 import { JsonLd } from "@/components/seo/json-ld";
 import {
-  business,
   defaultDescription,
   defaultTitle,
   keywords,
@@ -43,13 +43,11 @@ export const metadata: Metadata = {
     siteName,
     locale: "en_US",
     type: "website",
-    images: [{ url: business.logoPath, alt: siteName }],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: defaultTitle,
     description: defaultDescription,
-    images: [business.logoPath],
   },
   robots: { index: true, follow: true },
 };
@@ -74,6 +72,7 @@ export default function RootLayout({
         className={`${sans.variable} ${display.variable} font-sans font-normal`}
       >
         <JsonLd />
+        <Analytics />
         <Navbar />
         <main>{children}</main>
         <Footer />

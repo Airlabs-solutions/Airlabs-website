@@ -7,7 +7,7 @@ export const metadata = pageMetadata({
   path: "/contact",
 });
 
-export default function ContactLayout({
+export default function ContactFormLayout({
   children,
 }: {
   children: React.ReactNode;

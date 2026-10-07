@@ -254,7 +254,7 @@ export function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="relative bg-background py-12 sm:py-16"
+      className="relative bg-background pb-4 pt-12 sm:pb-6 sm:pt-16"
     >
       <Container>
         <motion.div
@@ -280,7 +280,7 @@ export function Testimonials() {
       >
         <div
           className={cn(
-            "flex items-center justify-center",
+            "flex items-end justify-center",
             reduceMotion
               ? "relative py-6 sm:py-8"
               : "sticky top-14 h-[calc(100dvh-3.5rem)] sm:top-16 sm:h-[calc(100dvh-4rem)] lg:top-20 lg:h-[calc(100vh-5rem)]"

@@ -1,8 +1,10 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { CheckCircle2, Clock, Mail, MapPin, Phone, Send } from "lucide-react";
+import { Clock, Mail, MapPin, Phone, Send } from "lucide-react";
 import { PageHero } from "@/components/ui/page-hero";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
@@ -30,9 +32,9 @@ const emptyForm: FormState = {
 };
 
 export default function ContactPage() {
+  const router = useRouter();
   const [form, setForm] = useState<FormState>(emptyForm);
   const [website, setWebsite] = useState("");
-  const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
 
@@ -56,12 +58,16 @@ export default function ContactPage() {
         body: JSON.stringify({ ...form, website }),
       });
       if (!response.ok) {
+        const data = (await response.json().catch(() => null)) as {
+          error?: string;
+        } | null;
         setError(
-          `We couldn't send that. Email ${contactDetails.email} and we'll pick it up.`
+          data?.error ||
+            `We couldn't send that. Email ${contactDetails.email} and we'll pick it up.`
         );
         return;
       }
-      setSubmitted(true);
+      router.push("/contact/thanks");
     } catch {
       setError(
         `We couldn't send that. Email ${contactDetails.email} and we'll pick it up.`
@@ -93,30 +99,6 @@ export default function ContactPage() {
           >
             {/* Form */}
             <motion.div variants={fadeUp}>
-              {submitted ? (
-                <div className="flex flex-col items-start rounded-3xl border border-emerald-500/25 bg-emerald-500/5 p-8 sm:p-10">
-                  <CheckCircle2 className="h-10 w-10 text-emerald-600 dark:text-emerald-400" />
-                  <h2 className="mt-4 font-display text-2xl font-semibold text-foreground">
-                    Message received
-                  </h2>
-                  <p className="mt-2 max-w-md text-muted-foreground">
-                    Thanks, {form.name || "there"}. We&apos;ll review what you
-                    shared and get back within one business day.
-                  </p>
-                  <Button
-                    type="button"
-                    variant="secondary"
-                    className="mt-6"
-                    onClick={() => {
-                      setSubmitted(false);
-                      setError("");
-                      setForm(emptyForm);
-                    }}
-                  >
-                    Send another message
-                  </Button>
-                </div>
-              ) : (
                 <form
                   onSubmit={onSubmit}
                   className="relative rounded-3xl border border-border bg-surface/40 p-6 sm:p-8"
@@ -135,8 +117,14 @@ export default function ContactPage() {
                     Project inquiry
                   </h2>
                   <p className="mt-2 text-sm text-muted-foreground">
-                    Fill in the details below — the more context, the better we
-                    can prepare.
+                    Fill in the details below. If you are still choosing a lane,{" "}
+                    <Link
+                      href="/services"
+                      className="font-medium text-foreground underline decoration-border underline-offset-4 hover:text-navy-600 dark:hover:text-navy-300"
+                    >
+                      see the services
+                    </Link>
+                    .
                   </p>
 
                   <div className="mt-8 grid gap-4 sm:grid-cols-2">
@@ -247,8 +235,17 @@ export default function ContactPage() {
                     {sending ? "Sending…" : "Send message"}
                     <Send className="h-4 w-4" />
                   </Button>
+                  <p className="mt-4 text-xs text-muted-foreground">
+                    We use this to reply. Read the{" "}
+                    <Link
+                      href="/privacy"
+                      className="font-medium text-foreground underline decoration-border underline-offset-4 hover:text-navy-600 dark:hover:text-navy-300"
+                    >
+                      privacy policy
+                    </Link>
+                    .
+                  </p>
                 </form>
-              )}
             </motion.div>
 
             {/* Contact details + map */}

@@ -144,7 +144,7 @@ export function Footer() {
         <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 text-xs text-muted-foreground sm:flex-row">
           <p>&copy; {new Date().getFullYear()} AirLabs Solutions. All rights reserved.</p>
           <div className="flex gap-6">
-            <Link href="#" className="hover:text-navy-600 dark:hover:text-navy-300">
+            <Link href="/privacy" className="hover:text-navy-600 dark:hover:text-navy-300">
               Privacy Policy
             </Link>
             <Link href="#" className="hover:text-navy-600 dark:hover:text-navy-300">

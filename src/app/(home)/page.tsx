@@ -5,12 +5,15 @@ import { Services } from "@/components/sections/services";
 import { Process } from "@/components/sections/process";
 import { Stats } from "@/components/sections/stats";
 import { Testimonials } from "@/components/sections/testimonials";
+import { Faq } from "@/components/sections/faq";
 import { TechStack } from "@/components/sections/tech-stack";
 import { CTABanner } from "@/components/sections/cta-banner";
+import { FaqJsonLd } from "@/components/seo/faq-json-ld";
 
 export default function Home() {
   return (
     <>
+      <FaqJsonLd />
       <Hero />
       <About />
       <LogoMarquee />
@@ -18,6 +21,7 @@ export default function Home() {
       <Process />
       <Stats />
       <Testimonials />
+      <Faq />
       <TechStack />
       <CTABanner />
     </>

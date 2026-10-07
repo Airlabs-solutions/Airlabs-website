@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Check } from "lucide-react";
 import { PageHero } from "@/components/ui/page-hero";
@@ -21,6 +22,16 @@ export default function ServicesPage() {
 
       <Section className="!pt-12 md:!pt-16">
         <Container>
+          <p className="pb-8 text-sm text-muted-foreground">
+            The people doing the work are on the{" "}
+            <Link
+              href="/about"
+              className="font-medium text-foreground underline decoration-border underline-offset-4 hover:text-navy-600 dark:hover:text-navy-300"
+            >
+              about page
+            </Link>
+            .
+          </p>
           {/* Jump links */}
           <div className="flex flex-wrap gap-2 border-b border-border pb-8">
             {services.map((service) => (

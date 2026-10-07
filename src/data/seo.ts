@@ -48,11 +48,6 @@ export const business = {
   logoPath: "/logos/airlabs-light.png",
 } as const;
 
-const ogImage = {
-  url: business.logoPath,
-  alt: siteName,
-};
-
 export function pageMetadata({
   title,
   description,
@@ -77,13 +72,11 @@ export function pageMetadata({
       siteName,
       locale: "en_US",
       type: "website",
-      images: [ogImage],
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title: socialTitle,
       description,
-      images: [business.logoPath],
     },
   };
 }

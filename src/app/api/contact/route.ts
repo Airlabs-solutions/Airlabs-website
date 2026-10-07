@@ -53,6 +53,35 @@ function readInquiry(body: unknown): Inquiry | null {
   return inquiry;
 }
 
+const RATE_WINDOW_MS = 10 * 60 * 1000;
+const RATE_MAX = 5;
+const attempts = new Map<string, number[]>();
+
+function clientIp(request: Request) {
+  return (
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    request.headers.get("x-real-ip") ||
+    "unknown"
+  );
+}
+
+function tooManyAttempts(ip: string) {
+  const now = Date.now();
+  const recent = (attempts.get(ip) ?? []).filter((at) => now - at < RATE_WINDOW_MS);
+  if (recent.length >= RATE_MAX) {
+    attempts.set(ip, recent);
+    return true;
+  }
+  recent.push(now);
+  attempts.set(ip, recent);
+  if (attempts.size > 1000) {
+    for (const [key, times] of attempts) {
+      if (times.every((at) => now - at >= RATE_WINDOW_MS)) attempts.delete(key);
+    }
+  }
+  return false;
+}
+
 function inquiryText(inquiry: Inquiry) {
   return [
     `Name: ${inquiry.name}`,
@@ -75,6 +104,15 @@ export async function POST(request: Request) {
 
   if (body && typeof body === "object" && text((body as Record<string, unknown>).website, 200)) {
     return NextResponse.json({ ok: true });
+  }
+
+  if (tooManyAttempts(clientIp(request))) {
+    return NextResponse.json(
+      {
+        error: `Too many messages from this network. Wait a few minutes, or email ${contactDetails.email}.`,
+      },
+      { status: 429 }
+    );
   }
 
   const inquiry = readInquiry(body);
