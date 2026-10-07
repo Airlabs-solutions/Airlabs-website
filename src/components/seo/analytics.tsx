@@ -14,8 +14,8 @@ export function Analytics() {
 
     window.dataLayer = window.dataLayer || [];
     if (typeof window.gtag !== "function") {
-      window.gtag = function gtag() {
-        window.dataLayer?.push(arguments);
+      window.gtag = function gtag(...args: unknown[]) {
+        window.dataLayer?.push(args);
       };
     }
     window.gtag("event", "generate_lead");

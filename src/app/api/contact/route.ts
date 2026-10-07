@@ -75,9 +75,9 @@ function tooManyAttempts(ip: string) {
   recent.push(now);
   attempts.set(ip, recent);
   if (attempts.size > 1000) {
-    for (const [key, times] of attempts) {
+    attempts.forEach((times, key) => {
       if (times.every((at) => now - at >= RATE_WINDOW_MS)) attempts.delete(key);
-    }
+    });
   }
   return false;
 }
