@@ -19,6 +19,20 @@ import type { ServiceCategory } from "@/types";
 
 const count = services.length;
 
+const quoteOptionBySlug: Record<string, string> = {
+  "software-development": "Software Development",
+  "mobile-app-development": "Mobile App Development",
+  "automation-ai": "Automation & AI",
+  "web-development": "Web Development",
+  "digital-marketing": "Digital Marketing",
+  "it-infrastructure": "IT Infrastructure",
+};
+
+function quoteHref(slug: string) {
+  const option = quoteOptionBySlug[slug];
+  return option ? `/contact?service=${encodeURIComponent(option)}` : "/contact";
+}
+
 export function Services() {
   const reduceMotion = useReducedMotion() ?? false;
 
@@ -92,6 +106,7 @@ function StackedServices() {
 
 function StackChrome() {
   const { count: n, trackRef, activeIndex } = useStackedScroll();
+  const active = services[activeIndex];
   const reduceMotion = useReducedMotion() ?? false;
 
   // Deep links: #services-{slug}
@@ -115,7 +130,7 @@ function StackChrome() {
   }, [n, reduceMotion, trackRef]);
 
   return (
-    <div className="sticky top-16 z-20 mx-auto flex max-w-4xl items-center justify-between gap-3 bg-charcoal-100 px-4 py-2.5 dark:bg-charcoal-900 sm:top-[4.5rem] sm:px-6 lg:top-20 lg:px-8">
+    <div className="sticky top-20 z-30 mx-auto flex max-w-4xl items-center justify-between gap-3 bg-charcoal-100 px-4 py-2.5 dark:bg-charcoal-900 sm:px-6 lg:px-8">
       <div className="flex min-w-0 items-center gap-3">
         <span className="font-mono text-[11px] font-bold tabular-nums text-navy-600 dark:text-navy-300">
           {String(activeIndex + 1).padStart(2, "0")} /{" "}
@@ -151,13 +166,26 @@ function StackChrome() {
           {services[activeIndex]?.shortLabel}
         </span>
       </div>
-      <Link
-        href="/services"
-        className="inline-flex shrink-0 items-center gap-1 text-xs font-semibold text-navy-600 dark:text-navy-300"
-      >
-        View all
-        <ArrowRight className="h-3.5 w-3.5" />
-      </Link>
+      <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+        <Button
+          href={active ? quoteHref(active.slug) : "/contact"}
+          size="md"
+          aria-label={
+            active ? `Get a quote for ${active.shortLabel}` : "Get a quote"
+          }
+          className="h-9 px-3.5 text-xs sm:px-4"
+        >
+          Get a quote
+          <ArrowRight className="h-3.5 w-3.5 shrink-0" />
+        </Button>
+        <Link
+          href="/services"
+          className="hidden items-center gap-1 text-xs font-semibold text-navy-600 dark:text-navy-300 sm:inline-flex"
+        >
+          View all
+          <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
+      </div>
     </div>
   );
 }
@@ -215,15 +243,6 @@ function ServiceCardPanel({
           </li>
         ))}
       </ul>
-
-      <Button
-        href="/contact"
-        size="md"
-        className="mt-6 w-fit"
-      >
-        Quote for {service.shortLabel}
-        <ArrowRight className="h-4 w-4 shrink-0" />
-      </Button>
     </article>
   );
 }
@@ -243,6 +262,15 @@ function StaticServiceList() {
       {services.map((service) => (
         <ServiceCardPanel key={service.slug} service={service} />
       ))}
+      <div className="flex flex-col items-start justify-between gap-4 rounded-2xl border border-border bg-surface px-5 py-5 sm:flex-row sm:items-center">
+        <p className="text-sm text-muted-foreground">
+          One team for the whole line. Tell us which service you need.
+        </p>
+        <Button href="/contact" size="md">
+          Get a quote
+          <ArrowRight className="h-4 w-4 shrink-0" />
+        </Button>
+      </div>
     </Container>
   );
 }

@@ -1,16 +1,25 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Script from "next/script";
 import { usePathname } from "next/navigation";
+import { CONSENT_CHANGE_EVENT, readCookieConsent } from "@/lib/consent";
 
 const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
 export function Analytics() {
   const pathname = usePathname();
+  const [allowed, setAllowed] = useState(false);
 
   useEffect(() => {
-    if (!measurementId || pathname !== "/contact/thanks") return;
+    const sync = () => setAllowed(readCookieConsent() === "accepted");
+    sync();
+    window.addEventListener(CONSENT_CHANGE_EVENT, sync);
+    return () => window.removeEventListener(CONSENT_CHANGE_EVENT, sync);
+  }, []);
+
+  useEffect(() => {
+    if (!measurementId || !allowed || pathname !== "/contact/thanks") return;
 
     window.dataLayer = window.dataLayer || [];
     if (typeof window.gtag !== "function") {
@@ -19,9 +28,9 @@ export function Analytics() {
       };
     }
     window.gtag("event", "generate_lead");
-  }, [pathname]);
+  }, [pathname, allowed]);
 
-  if (!measurementId || pathname === "/card") return null;
+  if (!measurementId || !allowed || pathname === "/card") return null;
 
   return (
     <>

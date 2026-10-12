@@ -9,6 +9,7 @@ import { Logo } from "@/components/ui/logo";
 import { LinkedinIcon } from "@/components/ui/linkedin-icon";
 import { Container } from "@/components/ui/container";
 import { services } from "@/data/services";
+import { openCookieSettings } from "@/lib/consent";
 
 const socials = [
   { label: "LinkedIn", icon: LinkedinIcon, href: "#" },
@@ -147,7 +148,14 @@ export function Footer() {
             <Link href="/privacy" className="hover:text-navy-600 dark:hover:text-navy-300">
               Privacy Policy
             </Link>
-            <Link href="#" className="hover:text-navy-600 dark:hover:text-navy-300">
+            <button
+              type="button"
+              onClick={openCookieSettings}
+              className="hover:text-navy-600 dark:hover:text-navy-300"
+            >
+              Cookie settings
+            </button>
+            <Link href="/terms" className="hover:text-navy-600 dark:hover:text-navy-300">
               Terms of Service
             </Link>
           </div>

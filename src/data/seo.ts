@@ -25,6 +25,9 @@ export const keywords = [
 
 export const business = {
   name: contactDetails.location.name,
+  legalName: "Mazin Solution Company",
+  legalNameAr: "شركة مازن سولووشن",
+  crNumber: "7054462721",
   email: contactDetails.email,
   phone: contactDetails.phone,
   phoneE164: "+966551076120",

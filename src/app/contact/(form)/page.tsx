@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
@@ -37,6 +37,16 @@ export default function ContactPage() {
   const [website, setWebsite] = useState("");
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    const requested = new URLSearchParams(window.location.search).get("service");
+    if (!requested) return;
+    const match = contactDetails.serviceOptions.find(
+      (option) => option === requested
+    );
+    if (!match) return;
+    setForm((prev) => ({ ...prev, service: match }));
+  }, []);
 
   const onChange = (
     e: React.ChangeEvent<

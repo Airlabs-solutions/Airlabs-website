@@ -104,7 +104,7 @@ export function ScrollStackCard({
       className={cn(
         // Native sticky — GPU scrolls the page; we don't scrub transforms
         // Compact sticky box — not full-bleed viewport height
-        "sticky top-[calc(4rem+2.75rem)] mx-auto mb-6 h-auto w-full last:mb-0 sm:top-[calc(4.5rem+2.75rem)] sm:mb-8 sm:last:mb-0 lg:top-[calc(5rem+2.75rem)]",
+        "sticky top-[calc(5rem+3.75rem)] mx-auto mb-6 h-auto w-full last:mb-0 sm:mb-8 sm:last:mb-0",
         className
       )}
       style={{ zIndex: index + 1 }}

@@ -3,6 +3,7 @@ import { Inter, Poppins } from "next/font/google";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Analytics } from "@/components/seo/analytics";
+import { CookieConsent } from "@/components/seo/cookie-consent";
 import { JsonLd } from "@/components/seo/json-ld";
 import {
   defaultDescription,
@@ -76,6 +77,7 @@ export default function RootLayout({
         <Navbar />
         <main>{children}</main>
         <Footer />
+        <CookieConsent />
       </body>
     </html>
   );
