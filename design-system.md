@@ -56,8 +56,8 @@ red/amber (e.g. destructive delete) before improvising one.
   Medium/SemiBold Inter weights are also loaded for labels and nav chrome.
 - **Buttons**: `Poppins` Medium (`font-display` + `font-medium`, weight 500) —
   applied on the shared `<Button>` component.
-- Loaded via `next/font/google` in `src/app/layout.tsx`, exposed as
-  `--font-display` / `--font-sans`.
+- Self-hosted with `next/font/local` in `src/app/layout.tsx` (files in
+  `src/fonts/`), exposed as `--font-display` / `--font-sans`.
 - Large headlines use `tracking-tight` and `text-balance` for confident wrapping.
 
 ## Spacing & layout

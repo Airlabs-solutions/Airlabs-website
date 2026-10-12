@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
+import localFont from "next/font/local";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Analytics } from "@/components/seo/analytics";
@@ -14,18 +14,29 @@ import {
 } from "@/data/seo";
 import "./globals.css";
 
-const sans = Inter({
-  subsets: ["latin"],
+const sans = localFont({
+  src: "../fonts/inter-latin.woff2",
+  weight: "400 600",
+  style: "normal",
   variable: "--font-sans",
   display: "swap",
-  weight: ["400", "500", "600"],
 });
 
-const display = Poppins({
-  subsets: ["latin"],
+const display = localFont({
+  src: [
+    {
+      path: "../fonts/poppins-500.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../fonts/poppins-600.woff2",
+      weight: "600",
+      style: "normal",
+    },
+  ],
   variable: "--font-display",
   display: "swap",
-  weight: ["500", "600"],
 });
 
 export const metadata: Metadata = {
