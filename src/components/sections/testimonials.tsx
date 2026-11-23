@@ -34,31 +34,31 @@ const STACKED: BloomPose[] = [
  * Order: dark, navy, white, muted, soft
  */
 const BLOOM_DESKTOP: BloomPose[] = [
-  { x: -440, y: -55, rotate: -5 },
+  { x: -440, y: -70, rotate: -5 },
   { x: 0, y: -185, rotate: -2 },
-  { x: -320, y: 215, rotate: 2 },
-  { x: 440, y: -55, rotate: 5 },
-  { x: 320, y: 215, rotate: 2 },
+  { x: -320, y: 225, rotate: 2 },
+  { x: 440, y: -70, rotate: 5 },
+  { x: 320, y: 225, rotate: 2 },
 ];
 
 const BLOOM_TABLET: BloomPose[] = [
-  { x: -275, y: -40, rotate: -4 },
-  { x: 0, y: -165, rotate: -2 },
-  { x: -190, y: 210, rotate: 2 },
-  { x: 275, y: -40, rotate: 4 },
-  { x: 190, y: 210, rotate: 2 },
+  { x: -275, y: -55, rotate: -4 },
+  { x: 0, y: -170, rotate: -2 },
+  { x: -190, y: 235, rotate: 2 },
+  { x: 275, y: -55, rotate: 4 },
+  { x: 190, y: 235, rotate: 2 },
 ];
 
 /**
- * Mobile: two columns, three rows. Offsets clear a ~9.6rem card
+ * Mobile: two columns, three rows. Offsets clear full-height cards
  * so nothing covers the quote or the name after the bloom.
  */
 const BLOOM_MOBILE: BloomPose[] = [
-  { x: -88, y: -198, rotate: -1.5 },
-  { x: 88, y: -198, rotate: 1.5 },
+  { x: -88, y: -255, rotate: -1.5 },
+  { x: 88, y: -255, rotate: 1.5 },
   { x: -88, y: 0, rotate: -1 },
   { x: 88, y: 0, rotate: 1 },
-  { x: 0, y: 198, rotate: 0 },
+  { x: 0, y: 255, rotate: 0 },
 ];
 
 const variantStyles: Record<
@@ -187,14 +187,14 @@ function TestimonialCard({
             : { x, y, rotate, scale: scaleMv }
         }
         className={cn(
-          "w-[9.6rem] rounded-3xl p-3 sm:w-[15rem] sm:p-5 lg:w-[16rem] lg:p-5",
+          "w-[9.6rem] rounded-3xl p-3 sm:w-[15rem] sm:p-5 lg:w-[17.5rem] lg:p-5",
           styles.card
         )}
       >
         <Stars className={styles.star} />
         <p
           className={cn(
-            "mt-2 line-clamp-4 text-[11px] leading-snug sm:mt-3 sm:line-clamp-5 sm:text-[13px] sm:leading-relaxed lg:line-clamp-5 lg:text-sm",
+            "mt-2 text-[11px] leading-snug sm:mt-3 sm:text-[13px] sm:leading-relaxed lg:text-sm",
             styles.quote
           )}
         >
@@ -291,8 +291,8 @@ export function Testimonials() {
               className={cn(
                 "relative mx-auto w-full max-w-6xl",
                 reduceMotion
-                  ? "h-[40rem] sm:h-[40rem] lg:h-[46rem]"
-                  : "h-[40rem] sm:h-[38rem] lg:h-[44rem]"
+                  ? "h-[48rem] sm:h-[46rem] lg:h-[48rem]"
+                  : "h-[48rem] sm:h-[46rem] lg:h-[46rem]"
               )}
               aria-label="Client testimonials"
             >
