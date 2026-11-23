@@ -14,7 +14,7 @@ export const testimonials: Testimonial[] = [
       "AirLabs built custom software around how our team actually works. In six weeks we replaced a pile of manual steps with one system, and they understood the business not just the request.",
     name: "Sharif",
     role: "Managing Director",
-    company: "Mazin Solutions",
+    company: "MBR Solutions",
     variant: "dark",
   },
   {
@@ -28,7 +28,7 @@ export const testimonials: Testimonial[] = [
   {
     quote:
       "WhatsApp now answers most of our everyday customer questions. Replies that used to take hours now take seconds, and when someone still needs a person, the switch is smooth.",
-    name: "Priya Nair",
+    name: "Yahaya Zainab",
     role: "Customer Experience Lead",
     company: "Solstice",
     variant: "white",
@@ -46,7 +46,7 @@ export const testimonials: Testimonial[] = [
       "Our Android and iOS app went live on time. They didn’t cut corners, and they still pick up when something breaks.",
     name: "Abdul Zaymir",
     role: "CEO",
-    company: "Marcazi",
+    company: "Marcam",
     variant: "soft",
   },
 ];

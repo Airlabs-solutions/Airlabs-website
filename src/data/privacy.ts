@@ -129,8 +129,8 @@ export const privacyEn: PrivacySection[] = [
   {
     title: "4. Who we share your data with",
     blocks: [
-      {
-        kind: "p",
+        {
+      kind: "p",
         text: "We do not sell your personal data. We share it only with:",
       },
       {
